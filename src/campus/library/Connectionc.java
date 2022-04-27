@@ -21,6 +21,7 @@ public class Connectionc {
             }
         } catch(Exception e){
             System.out.println(e);
+            
             System.out.println("Not Connected");
         }
     }
