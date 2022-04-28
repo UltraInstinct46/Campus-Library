@@ -9,7 +9,11 @@ package REGISTER;
  * @author ACER
  */
 public class Register_CampusLibrary extends javax.swing.JFrame {
-
+    public static String NAME;
+    public static String CLASS;
+    public static int NIM = 0;
+    public static 
+    
     /**
      * Creates new form Register_CampusLibrary
      */
