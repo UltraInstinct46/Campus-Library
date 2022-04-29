@@ -156,11 +156,9 @@ public class Login1_CampusLibrary extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //go to register
-        Register rg = new Register();
-        rg.setVisible(true);
-        rg.pack();
-        rg.SetLocationRelativeTo(null);
-        rg.SetDefaultCloseOperation(Register.EXIT_ON_CLOSE);
+        
+        
+        
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
