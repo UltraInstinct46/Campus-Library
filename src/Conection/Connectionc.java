@@ -4,15 +4,18 @@
  */
 package Conection;
 import java.sql.*;
+import java.sql.DriverManager;
+
+
 /**
  *
  * @author killua
  */
 public class Connectionc {
-    public Connection con;
-    public static void main(String[] args){
+    public static Connection con;
+    public static Connection setKoneksi(){
         try{
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
             
             if(con!=null){
@@ -25,6 +28,7 @@ public class Connectionc {
             
             System.out.println("Not Connected");
         }
+        return con;
     }
 }
 

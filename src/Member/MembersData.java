@@ -5,11 +5,10 @@
 package Member;
 
 import Conection.Connectionc;
-import com.sun.jdi.connect.spi.Connection;
-import com.mysql.cj.xdevapi.Statement;
-
+import java.sql.*;
 import REGISTER.*;
-import com.mysql.cj.protocol.Resultset;
+import javax.swing.JOptionPane;
+
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,18 +18,49 @@ import javax.swing.table.DefaultTableModel;
 public class MembersData extends javax.swing.JFrame {
     public static Connection con;
     public static Statement stm;
-    public static Resultset res;
+    public static ResultSet res;
+    public static DefaultTableModel tb = new DefaultTableModel();
+    Connectionc connection = new Connectionc();
     /**
      * Creates new form Register_CampusLibrary
      */
     public void showTable(){
-        DefaultTableModel tb = new DefaultTableModel();
+        tb.addColumn("id_anggota");
+        tb.addColumn("NIM");
+        tb.addColumn("nama_anggota");
+        tb.addColumn("kelas");
+        tb.addColumn("tempat_lahir");
+        tb.addColumn("tanggal_lahir");
         Member_Table.setModel(tb);
         
+        
+        try{
+            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
+            stm = con.createStatement();
+            res=stm.executeQuery("SELECT * FROM data_anggota");
+            while(res.next()){
+            tb.addRow(new Object[] {
+                res.getString(1),
+                res.getString(2),
+                res.getString(3),
+                res.getString(4),
+                res.getString(5),
+                res.getString(6),
+            });
+        }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Failed "  + e);
+        }
+        
     }
+
+    /**
+     *
+     */
     public MembersData() {
         initComponents();
-        Connectionc connection = new Connectionc();
+        connection.setKoneksi();
+        showTable();
     }
 
     /**
@@ -52,20 +82,20 @@ public class MembersData extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        id_textfield = new javax.swing.JTextField();
+        nim_textfield = new javax.swing.JTextField();
+        delete_button = new javax.swing.JButton();
+        nama_textfield = new javax.swing.JTextField();
+        update_button = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Member_Table = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        tempatlahir_textfield = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        tanggallahir_textfield = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,38 +161,31 @@ public class MembersData extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTextField1.setBackground(new java.awt.Color(51, 204, 0));
+        id_textfield.setBackground(new java.awt.Color(51, 204, 0));
 
-        jTextField2.setBackground(new java.awt.Color(51, 204, 0));
+        nim_textfield.setBackground(new java.awt.Color(51, 204, 0));
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 153));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(51, 51, 51));
-        jButton1.setText("DELETE");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        delete_button.setBackground(new java.awt.Color(0, 153, 153));
+        delete_button.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        delete_button.setForeground(new java.awt.Color(51, 51, 51));
+        delete_button.setText("DELETE");
+        delete_button.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        delete_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                delete_buttonActionPerformed(evt);
             }
         });
 
-        jTextField3.setBackground(new java.awt.Color(51, 204, 0));
+        nama_textfield.setBackground(new java.awt.Color(51, 204, 0));
 
-        jTextField4.setBackground(new java.awt.Color(51, 204, 0));
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        update_button.setBackground(new java.awt.Color(0, 153, 153));
+        update_button.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        update_button.setForeground(new java.awt.Color(51, 51, 51));
+        update_button.setText("UPDATE");
+        update_button.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        update_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setBackground(new java.awt.Color(0, 153, 153));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(51, 51, 51));
-        jButton2.setText("UPDATE");
-        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                update_buttonActionPerformed(evt);
             }
         });
 
@@ -179,25 +202,27 @@ public class MembersData extends javax.swing.JFrame {
 
         Member_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        Member_Table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Member_TableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(Member_Table);
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("TEMPAT LAHIR");
 
-        jTextField5.setBackground(new java.awt.Color(51, 204, 0));
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        tempatlahir_textfield.setBackground(new java.awt.Color(51, 204, 0));
+        tempatlahir_textfield.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                tempatlahir_textfieldActionPerformed(evt);
             }
         });
 
@@ -205,17 +230,27 @@ public class MembersData extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("TANGGAL LAHIR");
 
-        jTextField6.setBackground(new java.awt.Color(51, 204, 0));
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
-
         jTextField7.setBackground(new java.awt.Color(51, 204, 0));
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField7ActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<CHOOSE YOUR GENDER>", "MALE", "FEMALE" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        tanggallahir_textfield.setBackground(new java.awt.Color(51, 204, 0));
+        tanggallahir_textfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tanggallahir_textfieldActionPerformed(evt);
             }
         });
 
@@ -230,9 +265,9 @@ public class MembersData extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(update_button, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(124, 124, 124)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(delete_button, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,12 +279,12 @@ public class MembersData extends javax.swing.JFrame {
                             .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(nama_textfield, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(id_textfield, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nim_textfield, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                            .addComponent(tempatlahir_textfield, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tanggallahir_textfield))
                         .addGap(283, 283, 283))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -271,37 +306,37 @@ public class MembersData extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(id_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nim_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nama_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tempatlahir_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                    .addComponent(tanggallahir_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(delete_button, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(update_button, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -320,33 +355,46 @@ public class MembersData extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void delete_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_buttonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_delete_buttonActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_update_buttonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void tempatlahir_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tempatlahir_textfieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_tempatlahir_textfieldActionPerformed
 
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void tanggallahir_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tanggallahir_textfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tanggallahir_textfieldActionPerformed
+
+    private void Member_TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Member_TableMouseClicked
+        // TODO add your handling code here:
+        int i = Member_Table.getSelectedRow();
+        
+        if(i>-1){
+            id_textfield.setText(tb.getValueAt(i,0).toString());
+            nim_textfield.setText(tb.getValueAt(i,1).toString());
+            nama_textfield.setText(tb.getValueAt(i,2).toString());
+            tempatlahir_textfield.setText(tb.getValueAt(i,4).toString());
+            tanggallahir_textfield.setText(tb.getValueAt(i,5).toString());
+        }
+    }//GEN-LAST:event_Member_TableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -388,9 +436,10 @@ public class MembersData extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Member_Table;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton delete_button;
+    private javax.swing.JTextField id_textfield;
     private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -404,12 +453,11 @@ public class MembersData extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField nama_textfield;
+    private javax.swing.JTextField nim_textfield;
+    private javax.swing.JTextField tanggallahir_textfield;
+    private javax.swing.JTextField tempatlahir_textfield;
+    private javax.swing.JButton update_button;
     // End of variables declaration//GEN-END:variables
 }
