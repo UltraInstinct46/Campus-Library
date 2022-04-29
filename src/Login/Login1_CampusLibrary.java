@@ -161,6 +161,8 @@ public class Login1_CampusLibrary extends javax.swing.JFrame {
         rg.pack();
         rg.SetLocationRelativeTo(null);
         rg.SetDefaultCloseOperation(Register.EXIT_ON_CLOSE);
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
