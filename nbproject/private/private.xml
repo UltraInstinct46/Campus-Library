@@ -3,9 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/LENOVO/OneDrive/Documents/TUGAS%20KULIAH/SEMESTER%202%20TAHAP%201/PROJECT%202%20JVP/Campus-Library/src/Login/Login_CampusLibrary.java</file>
             <file>file:/C:/Users/LENOVO/OneDrive/Documents/TUGAS%20KULIAH/SEMESTER%202%20TAHAP%201/PROJECT%202%20JVP/Campus-Library/src/DataPetugas/DataPetugas_CampusLibrary.java</file>
             <file>file:/C:/Users/LENOVO/OneDrive/Documents/TUGAS%20KULIAH/SEMESTER%202%20TAHAP%201/PROJECT%202%20JVP/Campus-Library/src/REGISTER/Register_CampusLibrary.java</file>
+=======
+            <file>file:/D:/project/JAVA/CCIT/Campus-Library/src/Conection/Connectionc.java</file>
+            <file>file:/D:/project/JAVA/CCIT/Campus-Library/src/Member/MembersData.java</file>
+            <file>file:/D:/project/JAVA/CCIT/Campus-Library/src/REGISTER/Register_CampusLibrary.java</file>
+>>>>>>> b66bcc4b6b2655e6c02ae497b80f216fdaaec40d
         </group>
     </open-files>
 </project-private>
