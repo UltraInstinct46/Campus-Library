@@ -6,6 +6,10 @@ package DataBuku;
 
 
 import Conection.Connectionc;
+import static Member.MembersData.con;
+import static Member.MembersData.res;
+import static Member.MembersData.stm;
+import static Member.MembersData.tb;
 import java.sql.*;
 import REGISTER.*;
 import javax.swing.JOptionPane;
@@ -17,6 +21,11 @@ import javax.swing.table.DefaultTableModel;
  * @author ACER
  */
 public class GUI_DataBuku extends javax.swing.JFrame {
+    public static Connection con;
+    public static Statement stm;
+    public static ResultSet res;
+    public static DefaultTableModel tb;
+    Connectionc connection = new Connectionc();
 
     /**
      * Creates new form GUI_DataBuku
@@ -36,8 +45,9 @@ public class GUI_DataBuku extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        DataBuku = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1024, 637));
@@ -48,43 +58,56 @@ public class GUI_DataBuku extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("AVAILABLE BOOKS");
+        jLabel1.setText("YANG TERSEDIA");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        DataBuku.setBackground(new java.awt.Color(0, 204, 255));
+        DataBuku.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        DataBuku.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        DataBuku.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Buku", "Judul Buku", "Penerbit", "Pengarang", "Tahun Terbit", "Kategori"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane2.setViewportView(DataBuku);
+
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("DATA-DATA BUKU");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(250, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(329, 329, 329)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(191, 191, 191)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(191, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(224, 224, 224))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(320, 320, 320))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addGap(26, 26, 26)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(270, 270, 270))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -135,11 +158,44 @@ public class GUI_DataBuku extends javax.swing.JFrame {
             }
         });
     }
-
+public void showTable(){
+        tb = new DefaultTableModel();
+        tb.addColumn("id_anggota");
+        tb.addColumn("NIM");
+        tb.addColumn("nama_anggota");
+        tb.addColumn("kelas");
+        tb.addColumn("tempat_lahir");
+        tb.addColumn("tanggal_lahir");
+        DataBuku.setModel(tb);
+        
+        
+        try{
+            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
+            stm = con.createStatement();
+            res=stm.executeQuery("SELECT * FROM data_buku");
+            while(res.next()){
+            tb.addRow(new Object[] {
+                res.getString(1),
+                res.getString(2),
+                res.getString(3),
+                res.getString(4),
+                res.getString(5),
+                res.getString(6),
+            });
+        }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Failed "  + e);
+        }
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable DataBuku;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
+
+
+
