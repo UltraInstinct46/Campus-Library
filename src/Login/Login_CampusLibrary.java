@@ -4,18 +4,21 @@
  */
 package Login;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author LENOVO
  */
-public class Login1_CampusLibrary extends javax.swing.JFrame {
-    
+public class Login_CampusLibrary extends javax.swing.JFrame {
+    public static String username;
+    public static String password;
     
 
     /**
      * Creates new form Login_CampusLibrary
      */
-    public Login1_CampusLibrary() {
+    public Login_CampusLibrary() {
         initComponents();
     }
 
@@ -90,6 +93,11 @@ public class Login1_CampusLibrary extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(0, 153, 255));
         jButton2.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jButton2.setText("Sign In");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -156,14 +164,30 @@ public class Login1_CampusLibrary extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //go to register
-        
-        
-        //test
-        
-        
-        
+        Register rg = new Register();
+        rg.setVisible(true);
+        rg.pack();
+        rg.setLocationRelativeTo(null);
+        rg.setDefaultCloseOperation(Register.EXIT_ON_CLOSE);
+        this.setVisible(false);
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        //go to login
+        
+        txtusername.setText(Register.username);
+        txtpassword.setText(Register.password);
+        
+        Home hm = new Home();
+        hm.setVisible(true);
+        hm.pack();
+        hm.setLocationRelativeTo(null);
+        hm.setDefaultCloseOperation(Home.EXIT_ON_CLOSE);
+        JOptionPane.showMessageDialog(null, "Login Sukses !" );
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,21 +206,23 @@ public class Login1_CampusLibrary extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login1_CampusLibrary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login_CampusLibrary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login1_CampusLibrary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login_CampusLibrary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login1_CampusLibrary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login_CampusLibrary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login1_CampusLibrary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login_CampusLibrary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login1_CampusLibrary().setVisible(true);
+                new Login_CampusLibrary().setVisible(true);
             }
         });
     }
