@@ -68,6 +68,17 @@ public class MembersData extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Failed "  + e);
         }
     }
+        public void createData(){
+            String SQL = "INSERT INTO data_anggota (NIM,nama_anggota,kelas,tempat_lahir,tanggal_lahir) "
+                    + "VALUES('"+nim_textfield.getText()+"','"+nama_textfield.getText()+"','"+kelas_combobox.getSelectedItem().toString()+"',"
+                    + "'"+tempatlahir_textfield.getText()+"','"+tanggallahir_textfield.getText()+"')";
+        try{
+            stm.execute(SQL);
+            showTable();
+        }catch(Exception e){
+                JOptionPane.showMessageDialog(null,"Failed "  + e);
+        }
+    }
     
     public void deleteData(){
         int baris = Member_Table.getSelectedRow();
@@ -446,6 +457,7 @@ public class MembersData extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        createData();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void tempatlahir_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tempatlahir_textfieldActionPerformed
