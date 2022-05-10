@@ -50,9 +50,8 @@ public class GUI_DataBuku extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1024, 637));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(102, 204, 255));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
@@ -60,11 +59,21 @@ public class GUI_DataBuku extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("YANG TERSEDIA");
 
-        DataBuku.setBackground(new java.awt.Color(0, 204, 255));
-        DataBuku.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        DataBuku.setBackground(new java.awt.Color(255, 255, 255));
         DataBuku.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        DataBuku.setForeground(new java.awt.Color(0, 0, 0));
         DataBuku.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {"", "", "", "", "", ""},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -74,6 +83,11 @@ public class GUI_DataBuku extends javax.swing.JFrame {
                 "ID Buku", "Judul Buku", "Penerbit", "Pengarang", "Tahun Terbit", "Kategori"
             }
         ));
+        DataBuku.setFocusable(false);
+        DataBuku.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        DataBuku.setShowGrid(true);
+        DataBuku.setShowHorizontalLines(true);
+        DataBuku.setShowVerticalLines(true);
         jScrollPane2.setViewportView(DataBuku);
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
@@ -87,16 +101,15 @@ public class GUI_DataBuku extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(217, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(320, 320, 320))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(205, 205, 205))))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(320, 320, 320))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(197, 197, 197)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(225, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,9 +118,9 @@ public class GUI_DataBuku extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(172, 172, 172))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -160,12 +173,12 @@ public class GUI_DataBuku extends javax.swing.JFrame {
     }
 public void showTable(){
         tb = new DefaultTableModel();
-        tb.addColumn("id_anggota");
-        tb.addColumn("NIM");
-        tb.addColumn("nama_anggota");
-        tb.addColumn("kelas");
-        tb.addColumn("tempat_lahir");
-        tb.addColumn("tanggal_lahir");
+        tb.addColumn("id_buku");
+        tb.addColumn("judul_buku");
+        tb.addColumn("penerbit");
+        tb.addColumn("pengarang");
+        tb.addColumn("tahun_terbit");
+        tb.addColumn("kategori");
         DataBuku.setModel(tb);
         
         
