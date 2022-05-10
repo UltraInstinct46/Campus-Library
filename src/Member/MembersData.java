@@ -181,7 +181,7 @@ public class MembersData extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(java.awt.Color.white);
+        jPanel1.setBackground(new java.awt.Color(102, 204, 255));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Rockwell", 1, 48)); // NOI18N
@@ -243,9 +243,9 @@ public class MembersData extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        id_textfield.setBackground(new java.awt.Color(51, 204, 0));
+        id_textfield.setBackground(new java.awt.Color(255, 255, 255));
 
-        nim_textfield.setBackground(new java.awt.Color(51, 204, 0));
+        nim_textfield.setBackground(new java.awt.Color(255, 255, 255));
 
         delete_button.setBackground(new java.awt.Color(0, 153, 153));
         delete_button.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -258,7 +258,7 @@ public class MembersData extends javax.swing.JFrame {
             }
         });
 
-        nama_textfield.setBackground(new java.awt.Color(51, 204, 0));
+        nama_textfield.setBackground(new java.awt.Color(255, 255, 255));
 
         update_button.setBackground(new java.awt.Color(0, 153, 153));
         update_button.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -282,6 +282,7 @@ public class MembersData extends javax.swing.JFrame {
             }
         });
 
+        Member_Table.setBackground(new java.awt.Color(255, 255, 255));
         Member_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -290,6 +291,7 @@ public class MembersData extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        Member_Table.setShowGrid(true);
         Member_Table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Member_TableMouseClicked(evt);
@@ -301,7 +303,7 @@ public class MembersData extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("TEMPAT LAHIR");
 
-        tempatlahir_textfield.setBackground(new java.awt.Color(51, 204, 0));
+        tempatlahir_textfield.setBackground(new java.awt.Color(255, 255, 255));
         tempatlahir_textfield.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tempatlahir_textfieldActionPerformed(evt);
@@ -312,7 +314,7 @@ public class MembersData extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("TANGGAL LAHIR");
 
-        search_textfield.setBackground(new java.awt.Color(51, 204, 0));
+        search_textfield.setBackground(new java.awt.Color(255, 255, 255));
         search_textfield.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 search_textfieldActionPerformed(evt);
@@ -337,7 +339,7 @@ public class MembersData extends javax.swing.JFrame {
             }
         });
 
-        tanggallahir_textfield.setBackground(new java.awt.Color(51, 204, 0));
+        tanggallahir_textfield.setBackground(new java.awt.Color(255, 255, 255));
         tanggallahir_textfield.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tanggallahir_textfieldActionPerformed(evt);
@@ -464,10 +466,6 @@ public class MembersData extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tempatlahir_textfieldActionPerformed
 
-    private void search_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_textfieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_search_textfieldActionPerformed
-
     private void kelas_comboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kelas_comboboxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_kelas_comboboxActionPerformed
@@ -496,14 +494,18 @@ public class MembersData extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Member_TableMouseClicked
 
-    private void search_textfieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_textfieldKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_search_textfieldKeyPressed
-
     private void search_textfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_textfieldKeyReleased
         // TODO add your handling code here:
         search();
     }//GEN-LAST:event_search_textfieldKeyReleased
+
+    private void search_textfieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_textfieldKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_search_textfieldKeyPressed
+
+    private void search_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_textfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_search_textfieldActionPerformed
 
     /**
      * @param args the command line arguments
