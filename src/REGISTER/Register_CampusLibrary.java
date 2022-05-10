@@ -4,6 +4,8 @@
  */
 package REGISTER;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ACER
@@ -263,7 +265,17 @@ public class Register_CampusLibrary extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        if(jTextField1.getText().isEmpty() || jTextField2.getText()isEmpty() || jTextField3.getText().isEmpty() || jTextField4.getText().isEmpty() || jTextField5.getText().isEmpty() || jComboBox1.getSelectedItem()){
+            JOptionPane.showMessageDialog(this,"Empty Is not allowed!");
+        }else{
+        NAME = jTextField1.getText();
+        CLASS = jTextField2.getText();
+        NIM = Integer.ParseInt(jTextField3.getText());
+        PLACE = jTextField4.getText();
+        DATE = jTextField5.getText();
+        GENDER = jComboBox1.getSelectedItem().toString();
+    }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
