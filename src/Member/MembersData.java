@@ -243,6 +243,7 @@ public class MembersData extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        id_textfield.setEditable(false);
         id_textfield.setBackground(new java.awt.Color(255, 255, 255));
 
         nim_textfield.setBackground(new java.awt.Color(255, 255, 255));
