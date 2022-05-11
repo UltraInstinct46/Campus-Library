@@ -5,10 +5,12 @@
 package Login;
 
 import Conection.ConnectionC1;
+import HalamanUtama.AdminPage;
 import HalamanUtama.MahasiswaPage;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 
 
@@ -19,7 +21,7 @@ import javax.swing.JOptionPane;
  * @author LENOVO
  */
 public class Login_CampusLibrary extends javax.swing.JFrame {
-    ConnectionC1 con;
+    Connection  con;
     PreparedStatement pst;
     ResultSet rs;
 
@@ -52,8 +54,6 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         txtUser = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        Jpilihan = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -128,18 +128,6 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/users (1).png"))); // NOI18N
-
-        Jpilihan.setBackground(new java.awt.Color(255, 255, 255));
-        Jpilihan.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
-        Jpilihan.setForeground(new java.awt.Color(0, 0, 0));
-        Jpilihan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Admin", "Mahasiswa" }));
-        Jpilihan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JpilihanActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -152,14 +140,12 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
-                            .addComponent(txtUser)
-                            .addComponent(Jpilihan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                            .addComponent(txtUser))))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,19 +161,15 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
                         .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Jpilihan, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap())
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(360, 220, 460, 250);
+        jPanel1.setBounds(360, 220, 460, 230);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/buku-1 (2).jpg"))); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(1154, 754));
@@ -218,15 +200,15 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
         // TODO add your handling code here:
         //login button code
         String username = txtUser.getText();
-        String password = txtPass.getText();
-        String option = Jpilihan.getSelectedItem().toString();
+        String password = String.valueOf(txtPass.getPassword());
+//        String option = Jpilihan.getSelectedItem().toString();
         
-        if(username.equals("")|| password.equals("")||option.equals("Select") ){
+        if(username.equals("")|| password.equals("") ){
             JOptionPane.showMessageDialog(rootPane, "Some Fields Are Empty", "Error", 1);
             
         }else{
             try{
-                con = ConnectionC1.getConnection();
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
                 pst = con.prepareStatement("Select * from multiuser_login where username=? and password=?");
                 pst.setString(1, username);
                 pst.setString(2, password);
@@ -235,15 +217,15 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
                 if(rs.next()){
                     String s1 = rs.getString("login_type");
                     String un = rs.getString("username");
-                    if(option.equalsIgnoreCase("Admin")&& s1.equalsIgnoreCase("admin")){
+                    if(s1.equalsIgnoreCase("admin")){
                         AdminPage ad = new AdminPage(un);
                         ad.setVisible(true);
-                        setVisible(false);   
+                        this.setVisible(false);   
                     }
-                    if(option.equalsIgnoreCase("mahasiswa")&& s1.equalsIgnoreCase("mahasiswa")){
+                    else if(s1.equalsIgnoreCase("mahasiswa")){
                         MahasiswaPage mp = new MahasiswaPage(un);
                         mp.setVisible(true);
-                        setVisible(false);   
+                        this.setVisible(false);   
                     }
                     
                 }else{
@@ -279,10 +261,6 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
-
-    private void JpilihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JpilihanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JpilihanActionPerformed
 
     
 
@@ -385,13 +363,11 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> Jpilihan;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
@@ -399,17 +375,17 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 
-    private static class AdminPage {
-
-        public AdminPage() {
-        }
-
-        private AdminPage(String username) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        }
-
-        private void setVisible(boolean b) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        }
-    }
+//    private static class AdminPage {
+//
+//        public AdminPage() {
+//        }
+//
+//        private AdminPage(String username) {
+//            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//        }
+//
+//        private void setVisible(boolean b) {
+//            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//        }
+//    }
 }
