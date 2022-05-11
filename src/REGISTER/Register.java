@@ -9,6 +9,10 @@ package REGISTER;
  * @author ACER
  */
 public class Register {
+
+    public static void setVisible(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     private String name,kelas,place,date,gender;
     private int nim;
     
@@ -96,5 +100,9 @@ public class Register {
      */
     public void setGender (String gender){
         this.gender = gender;
+    }
+
+    public void show() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
