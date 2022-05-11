@@ -1,24 +1,27 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Login;
 
-import REGISTER.Register;
-import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import Conection.ConnectionC1;
+import HalamanUtama.MahasiswaPage;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Connection;
 import javax.swing.JOptionPane;
+
+
+
 
 /**
  *
  * @author LENOVO
  */
 public class Login_CampusLibrary extends javax.swing.JFrame {
+    ConnectionC1 con;
     PreparedStatement pst;
-    Connection con;
     ResultSet rs;
-    
 
     /**
      * Creates new form Login_CampusLibrary
@@ -27,10 +30,9 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
         initComponents();
     }
     
-    String driver = "com.mysql.cj.jdbc.Driver";
-    String url = "jdbc:mysql://localhost:3306;databaseName=db_library";
-    String user = "root";
-    String pass = "";
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,7 +53,7 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         txtUser = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        Jpilihan = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,10 +61,11 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Rockwell", 1, 48)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("CAMPUS LIBRARY");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(210, 130, 580, 80);
+        jLabel2.setBounds(290, 130, 580, 80);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/logo ccit (2).png"))); // NOI18N
         getContentPane().add(jLabel3);
@@ -74,8 +77,7 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
         txtPass.setBackground(new java.awt.Color(255, 255, 255));
         txtPass.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
         txtPass.setForeground(new java.awt.Color(0, 0, 0));
-        txtPass.setText("jPasswordField1");
-        txtPass.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
+        txtPass.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), null));
         txtPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPassActionPerformed(evt);
@@ -119,6 +121,7 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
         txtUser.setBackground(new java.awt.Color(255, 255, 255));
         txtUser.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
         txtUser.setForeground(new java.awt.Color(0, 0, 0));
+        txtUser.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), null));
         txtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUserActionPerformed(evt);
@@ -127,13 +130,13 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/users (1).png"))); // NOI18N
 
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Admin", "Mahasiswa" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        Jpilihan.setBackground(new java.awt.Color(255, 255, 255));
+        Jpilihan.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        Jpilihan.setForeground(new java.awt.Color(0, 0, 0));
+        Jpilihan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Admin", "Mahasiswa" }));
+        Jpilihan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                JpilihanActionPerformed(evt);
             }
         });
 
@@ -155,7 +158,7 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
                             .addComponent(txtUser)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(Jpilihan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -175,7 +178,7 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                    .addComponent(Jpilihan, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -184,7 +187,7 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(280, 220, 460, 250);
+        jPanel1.setBounds(360, 220, 460, 250);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/buku-1 (2).jpg"))); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(1154, 754));
@@ -205,28 +208,68 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        //go to register
+        // cancel button
+        System.exit(0);
          
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        //go to login
+        //login button code
+        String username = txtUser.getText();
+        String password = txtPass.getText();
+        String option = Jpilihan.getSelectedItem().toString();
+        
+        if(username.equals("")|| password.equals("")||option.equals("Select") ){
+            JOptionPane.showMessageDialog(rootPane, "Some Fields Are Empty", "Error", 1);
+            
+        }else{
+            try{
+                con = ConnectionC1.getConnection();
+                pst = con.prepareStatement("Select * from multiuser_login where username=? and password=?");
+                pst.setString(1, username);
+                pst.setString(2, password);
+                rs = pst.executeQuery();
+                
+                if(rs.next()){
+                    String s1 = rs.getString("login_type");
+                    String un = rs.getString("username");
+                    if(option.equalsIgnoreCase("Admin")&& s1.equalsIgnoreCase("admin")){
+                        AdminPage ad = new AdminPage(un);
+                        ad.setVisible(true);
+                        setVisible(false);   
+                    }
+                    if(option.equalsIgnoreCase("mahasiswa")&& s1.equalsIgnoreCase("mahasiswa")){
+                        MahasiswaPage mp = new MahasiswaPage(un);
+                        mp.setVisible(true);
+                        setVisible(false);   
+                    }
+                    
+                }else{
+                    JOptionPane.showMessageDialog(rootPane, "Username or Password Not Matched", "Login Error", 1);
+                 
+                }
+                
+            }catch(Exception ex){
+                System.out.println(""+ex);
+        }
+    }
+        
+        
+        
         
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
     // TODO add your handling code here:
-        tomenu();
+     
     }//GEN-LAST:event_jButton2MousePressed
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         // TODO add your handling code here:
-        Register daftar = new Register();
-        daftar.show();
-        hide();
+    
     }//GEN-LAST:event_jButton1MousePressed
 
     private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
@@ -237,55 +280,12 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void JpilihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JpilihanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_JpilihanActionPerformed
 
     
-public void tomenu()
-{   
-        try
-        {
-            try {
-                Class.forName(driver);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Login_CampusLibrary.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            con = DriverManager.getConnection(url, user, pass);
-            String sql = "select * from data_anggota where nama_anggota=? and NIM=?";
-            
-            String username = txtUser.getText();
-            String password = txtPass.getText();
-            
-            pst = con.prepareStatement(sql);
-            pst.setString(1, username);
-            pst.setString(2, password);
-            
-            rs = pst.executeQuery();
-            
-            if(rs.next())
-            {
-            
-            JOptionPane.showMessageDialog(this, "Login succesfull");
-            
-            
-           
-            }
-            
-            else
-            {
-                JOptionPane.showMessageDialog(this, "username or password wrong, please try again!");
-                 
-            }
-        
-        }
-        catch (SQLException e)
-        {
-            JOptionPane.showMessageDialog(this, e);
-        }   
-        
-}        
-            
+
     /**
      * @param args the command line arguments
      */
@@ -327,6 +327,54 @@ public void tomenu()
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -337,9 +385,9 @@ public void tomenu()
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> Jpilihan;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -350,4 +398,18 @@ public void tomenu()
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
+
+    private static class AdminPage {
+
+        public AdminPage() {
+        }
+
+        private AdminPage(String username) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        private void setVisible(boolean b) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+    }
 }
