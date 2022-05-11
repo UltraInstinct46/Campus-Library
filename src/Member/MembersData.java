@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
 
+
 /**
  *
  * @author ACER
@@ -143,6 +144,7 @@ public class MembersData extends javax.swing.JFrame {
         initComponents();
         connection.setKoneksi();
         showTable();
+        setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -243,6 +245,7 @@ public class MembersData extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        id_textfield.setEditable(false);
         id_textfield.setBackground(new java.awt.Color(255, 255, 255));
 
         nim_textfield.setBackground(new java.awt.Color(255, 255, 255));
