@@ -143,6 +143,7 @@ public class MembersData extends javax.swing.JFrame {
         initComponents();
         connection.setKoneksi();
         showTable();
+        setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
     }
 
     /**
