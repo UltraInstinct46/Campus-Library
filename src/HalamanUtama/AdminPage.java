@@ -4,7 +4,7 @@
  */
 package HalamanUtama;
 
-import DataBuku.GUI_DataBuku;
+import DataBuku.DataPinjamBuku_CampusLibrary;
 import DataPetugas.DataPetugas_CampusLibrary;
 import Member.MembersData;
 
@@ -40,6 +40,7 @@ public class AdminPage extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+<<<<<<< HEAD
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
@@ -48,6 +49,8 @@ public class AdminPage extends javax.swing.JFrame {
         jButton10 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
+=======
+>>>>>>> c68e0d2b53fc494955bfe515e4a03a28540840e1
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +113,7 @@ public class AdminPage extends javax.swing.JFrame {
         jButton8.setForeground(new java.awt.Color(0, 0, 0));
         jButton8.setText("Data Buku");
 
+<<<<<<< HEAD
         jButton9.setBackground(new java.awt.Color(255, 255, 255));
         jButton9.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jButton9.setForeground(new java.awt.Color(0, 0, 0));
@@ -165,6 +169,27 @@ public class AdminPage extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jButton11)))
                 .addContainerGap(75, Short.MAX_VALUE))
+=======
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(243, Short.MAX_VALUE))
+>>>>>>> c68e0d2b53fc494955bfe515e4a03a28540840e1
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,6 +198,7 @@ public class AdminPage extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(37, 37, 37)
                 .addComponent(jLabel1)
+<<<<<<< HEAD
                 .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -193,6 +219,15 @@ public class AdminPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
                 .addComponent(jButton11)
                 .addGap(14, 14, 14))
+=======
+                .addGap(129, 129, 129)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(168, Short.MAX_VALUE))
+>>>>>>> c68e0d2b53fc494955bfe515e4a03a28540840e1
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -215,7 +250,13 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+<<<<<<< HEAD
     }//GEN-LAST:event_jButton6ActionPerformed
+=======
+        DataPinjamBuku_CampusLibrary db = new DataPinjamBuku_CampusLibrary();
+        db.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+>>>>>>> c68e0d2b53fc494955bfe515e4a03a28540840e1
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
@@ -263,11 +304,14 @@ public class AdminPage extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+<<<<<<< HEAD
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+=======
+>>>>>>> c68e0d2b53fc494955bfe515e4a03a28540840e1
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
