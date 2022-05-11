@@ -43,7 +43,6 @@ public class LoginAdmin_CampusLibrary extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1018, 1241));
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Rockwell", 1, 48)); // NOI18N
