@@ -9,6 +9,7 @@ import Conection.Connectionc;
 import static DataBuku.DataPinjamBuku_CampusLibrary.con;
 import static DataBuku.DataPinjamBuku_CampusLibrary.id;
 import static DataBuku.DataPinjamBuku_CampusLibrary.stm;
+import Login.Login_CampusLibrary;
 import java.sql.*;
 import REGISTER.*;
 import java.awt.event.ActionEvent;
@@ -154,7 +155,7 @@ public class DataPengembalianBuku_CampusLibrary extends javax.swing.JFrame {
             String SQL = "UPDATE data_peminjambuku SET "
                     + "status='"+"Sudah Dikembalikan"+"',"
                     + "tgl_pengembalian='"+java.time.LocalDate.now()+"' "
-                    + "WHERE username='"+"username"+"' AND id_buku="+id;
+                    + "WHERE username='"+Login_CampusLibrary.usm+"' AND id_buku="+id;
             stm.execute(SQL);
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Failed "  + e);
