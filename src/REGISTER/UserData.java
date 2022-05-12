@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Member;
+package REGISTER;
 
+import Member.*;
 import Conection.Connectionc;
 import java.sql.*;
 import REGISTER.*;
@@ -16,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ACER
  */
-public class MembersData extends javax.swing.JFrame {
+public class UserData extends javax.swing.JFrame {
     public static Connection con;
     public static Statement stm;
     public static ResultSet res;
@@ -27,29 +28,21 @@ public class MembersData extends javax.swing.JFrame {
      */
     public void search(){
         tb = new DefaultTableModel();
-        tb.addColumn("id_anggota");
-        tb.addColumn("NIM");
         tb.addColumn("username");
-        tb.addColumn("nama_anggota");
-        tb.addColumn("kelas");
-        tb.addColumn("tempat_lahir");
-        tb.addColumn("tanggal_lahir");
+        tb.addColumn("password");
+        tb.addColumn("login_type");
         Member_Table.setModel(tb);
         String text = search_textfield.getText();
         
         try{
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
             stm = con.createStatement();
-            res=stm.executeQuery("SELECT * FROM data_anggota WHERE nama_anggota LIKE '%"+text+"%'");
+            res=stm.executeQuery("SELECT * FROM multiuser_login WHERE username LIKE '%"+text+"%'");
             while(res.next()){
             tb.addRow(new Object[] {
                 res.getString(1),
                 res.getString(2),
                 res.getString(3),
-                res.getString(4),
-                res.getString(5),
-                res.getString(6),
-                res.getString(6),
             });
         }
         }catch(Exception e){
@@ -58,13 +51,10 @@ public class MembersData extends javax.swing.JFrame {
         
     }
     public void updateData(){
-            String SQL = "UPDATE data_anggota SET "
-                    + "NIM='"+nim_textfield.getText()+"',"
-                    + "username='"+username_textfield.getText()+"',"
-                    + "nama_anggota='"+nama_textfield.getText()+"',kelas='"+kelas_combobox.getSelectedItem().toString()+"',"
-                    + "tempat_lahir='"+tempatlahir_textfield.getText()+"',"
-                    + "tanggal_lahir='"+tanggallahir_textfield.getText()+"' "
-                    + "WHERE id_anggota='"+id_textfield.getText()+"'";
+            String SQL = "UPDATE multiuser_login SET "
+                    + "password='"+String.valueOf(password_passwordfield.getPassword())+"',"
+                    + "login_type='"+roles_combobox.getSelectedItem().toString()+"' "
+                    + "WHERE username='"+username_textfield.getText()+"'";
         try{
             stm.execute(SQL);
             showTable();
@@ -73,9 +63,8 @@ public class MembersData extends javax.swing.JFrame {
         }
     }
         public void createData(){
-            String SQL = "INSERT INTO data_anggota (NIM,username,nama_anggota,kelas,tempat_lahir,tanggal_lahir) "
-                    + "VALUES('"+nim_textfield.getText()+"','"+username_textfield.getText()+"','"+nama_textfield.getText()+"','"+kelas_combobox.getSelectedItem().toString()+"',"
-                    + "'"+tempatlahir_textfield.getText()+"','"+tanggallahir_textfield.getText()+"')";
+            String SQL = "INSERT INTO multiuser_login (username,password,login_type) "
+                    + "VALUES('"+username_textfield.getText()+"','"+String.valueOf(password_passwordfield.getPassword())+"','"+roles_combobox.getSelectedItem().toString()+"')";
         try{
             stm.execute(SQL);
             showTable();
@@ -88,7 +77,7 @@ public class MembersData extends javax.swing.JFrame {
         int baris = Member_Table.getSelectedRow();
         if (baris != -1) {
             String id = Member_Table.getValueAt(baris, 0).toString();
-            String SQL = "DELETE FROM data_anggota WHERE id_anggota ='"+id+"'";
+            String SQL = "DELETE FROM multiuser_login WHERE username ='"+id+"'";
             try{
              con= DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
              stm = con.createStatement();
@@ -110,30 +99,22 @@ public class MembersData extends javax.swing.JFrame {
 //        }
     }
     public void showTable(){
-        tb = new DefaultTableModel();
-        tb.addColumn("id_anggota");
-        tb.addColumn("NIM");
+        tb = new DefaultTableModel();       
         tb.addColumn("username");
-        tb.addColumn("nama_anggota");
-        tb.addColumn("kelas");
-        tb.addColumn("tempat_lahir");
-        tb.addColumn("tanggal_lahir");
+        tb.addColumn("password");
+        tb.addColumn("login_type");
         Member_Table.setModel(tb);
         
         
         try{
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
             stm = con.createStatement();
-            res=stm.executeQuery("SELECT * FROM data_anggota");
+            res=stm.executeQuery("SELECT * FROM multiuser_login");
             while(res.next()){
             tb.addRow(new Object[] {
                 res.getString(1),
                 res.getString(2),
                 res.getString(3),
-                res.getString(4),
-                res.getString(5),
-                res.getString(6),
-                res.getString(7),
             });
         }
         }catch(Exception e){
@@ -145,7 +126,7 @@ public class MembersData extends javax.swing.JFrame {
     /**
      *
      */
-    public MembersData() {
+    public UserData() {
         initComponents();
         connection.setKoneksi();
         showTable();
@@ -165,26 +146,18 @@ public class MembersData extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        id_textfield = new javax.swing.JTextField();
-        nim_textfield = new javax.swing.JTextField();
+        username_textfield = new javax.swing.JTextField();
         delete_button = new javax.swing.JButton();
-        nama_textfield = new javax.swing.JTextField();
         update_button = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Member_Table = new javax.swing.JTable();
-        jLabel9 = new javax.swing.JLabel();
-        tempatlahir_textfield = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
         search_textfield = new javax.swing.JTextField();
-        kelas_combobox = new javax.swing.JComboBox<>();
-        tanggallahir_textfield = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        username_textfield = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        password_passwordfield = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
+        roles_combobox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -195,30 +168,19 @@ public class MembersData extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Centaur", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("DATA MEMBERS");
+        jLabel1.setText("DATA USER");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("NIM");
+        jLabel2.setText("PASSWORD");
 
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("ID");
+        jLabel3.setText("USERNAME");
         jLabel3.setPreferredSize(new java.awt.Dimension(72, 29));
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("NAMA ANGGOTA");
-
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("KELAS");
-
-        id_textfield.setEditable(false);
-        id_textfield.setBackground(new java.awt.Color(255, 255, 255));
-
-        nim_textfield.setBackground(new java.awt.Color(255, 255, 255));
+        username_textfield.setBackground(new java.awt.Color(255, 255, 255));
 
         delete_button.setBackground(new java.awt.Color(204, 204, 204));
         delete_button.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -230,8 +192,6 @@ public class MembersData extends javax.swing.JFrame {
                 delete_buttonActionPerformed(evt);
             }
         });
-
-        nama_textfield.setBackground(new java.awt.Color(255, 255, 255));
 
         update_button.setBackground(new java.awt.Color(204, 204, 204));
         update_button.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -272,22 +232,6 @@ public class MembersData extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(Member_Table);
 
-        jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("TEMPAT LAHIR");
-
-        tempatlahir_textfield.setBackground(new java.awt.Color(255, 255, 255));
-        tempatlahir_textfield.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tempatlahir_textfieldActionPerformed(evt);
-            }
-        });
-
-        jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel10.setText("TANGGAL LAHIR");
-        jLabel10.setMaximumSize(new java.awt.Dimension(1154, 754));
-
         search_textfield.setBackground(new java.awt.Color(255, 255, 255));
         search_textfield.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -303,32 +247,27 @@ public class MembersData extends javax.swing.JFrame {
             }
         });
 
-        kelas_combobox.setBackground(new java.awt.Color(255, 255, 255));
-        kelas_combobox.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        kelas_combobox.setForeground(new java.awt.Color(0, 0, 0));
-        kelas_combobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "2wd1", "2wd2", "2wd3" }));
-        kelas_combobox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kelas_comboboxActionPerformed(evt);
-            }
-        });
-
-        tanggallahir_textfield.setBackground(new java.awt.Color(255, 255, 255));
-        tanggallahir_textfield.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tanggallahir_textfieldActionPerformed(evt);
-            }
-        });
-
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/logo ccit (2).png"))); // NOI18N
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/search (2) (1).png"))); // NOI18N
 
-        username_textfield.setBackground(new java.awt.Color(255, 255, 255));
+        password_passwordfield.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("USERNAME");
+        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("ROLES");
+        jLabel4.setPreferredSize(new java.awt.Dimension(72, 29));
+
+        roles_combobox.setBackground(new java.awt.Color(255, 255, 255));
+        roles_combobox.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        roles_combobox.setForeground(new java.awt.Color(0, 0, 0));
+        roles_combobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Admin", "Mahasiswa" }));
+        roles_combobox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                roles_comboboxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -342,39 +281,20 @@ public class MembersData extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(95, 95, 95)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(139, 139, 139)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(roles_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(kelas_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nama_textfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tanggallahir_textfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tempatlahir_textfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(nim_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(210, 210, 210)
-                                    .addComponent(id_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(username_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(username_textfield, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                                .addComponent(password_passwordfield)))))
                 .addContainerGap(249, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel5)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4)))
-                        .addGap(460, 460, 460))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(4, 4, 4)
@@ -386,7 +306,7 @@ public class MembersData extends javax.swing.JFrame {
                         .addComponent(update_button, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60)
                         .addComponent(delete_button, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(173, 173, 173))
+                .addGap(165, 165, 165))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,35 +318,17 @@ public class MembersData extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(id_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(username_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nim_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(username_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(password_passwordfield))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel5)
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(nama_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13)
-                        .addComponent(kelas_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(tempatlahir_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tanggallahir_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(roles_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(search_textfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -439,7 +341,7 @@ public class MembersData extends javax.swing.JFrame {
                             .addComponent(delete_button, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(update_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(114, 114, 114))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -471,36 +373,18 @@ public class MembersData extends javax.swing.JFrame {
         createData();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void tempatlahir_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tempatlahir_textfieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tempatlahir_textfieldActionPerformed
-
-    private void kelas_comboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kelas_comboboxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_kelas_comboboxActionPerformed
-
-    private void tanggallahir_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tanggallahir_textfieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tanggallahir_textfieldActionPerformed
-
     private void Member_TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Member_TableMouseClicked
         // TODO add your handling code here:
         int i = Member_Table.getSelectedRow();
         String kelas;
         if(i>-1){
-            if(tb.getValueAt(i,3).toString().equals("2wd1")){
-                kelas_combobox.setSelectedIndex(1);
-            }else if(tb.getValueAt(i,3).toString().equals("2wd2")){
-                kelas_combobox.setSelectedIndex(2);
-            }else if(tb.getValueAt(i,3).toString().equals("2wd3")){
-                kelas_combobox.setSelectedIndex(3);
+            if(tb.getValueAt(i,2).toString().equals("Admin")){
+                roles_combobox.setSelectedIndex(1);
+            }else if(tb.getValueAt(i,2).toString().equals("Mahasiswa")){
+                roles_combobox.setSelectedIndex(2);
             }
-            id_textfield.setText(tb.getValueAt(i,0).toString());
-            nim_textfield.setText(tb.getValueAt(i,1).toString());
-            username_textfield.setText(tb.getValueAt(i,2).toString());
-            nama_textfield.setText(tb.getValueAt(i,3).toString());
-            tempatlahir_textfield.setText(tb.getValueAt(i,5).toString());
-            tanggallahir_textfield.setText(tb.getValueAt(i,6).toString());
+            username_textfield.setText(tb.getValueAt(i,0).toString());
+            password_passwordfield.setText(tb.getValueAt(i,1).toString());
         }
     }//GEN-LAST:event_Member_TableMouseClicked
 
@@ -516,6 +400,10 @@ public class MembersData extends javax.swing.JFrame {
     private void search_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_textfieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_search_textfieldActionPerformed
+
+    private void roles_comboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roles_comboboxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_roles_comboboxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -534,14 +422,18 @@ public class MembersData extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MembersData.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserData.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MembersData.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserData.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MembersData.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserData.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MembersData.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserData.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -550,7 +442,7 @@ public class MembersData extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MembersData().setVisible(true);
+                new UserData().setVisible(true);
             }
         });
     }
@@ -558,26 +450,18 @@ public class MembersData extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Member_Table;
     private javax.swing.JButton delete_button;
-    private javax.swing.JTextField id_textfield;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> kelas_combobox;
-    private javax.swing.JTextField nama_textfield;
-    private javax.swing.JTextField nim_textfield;
+    private javax.swing.JPasswordField password_passwordfield;
+    private javax.swing.JComboBox<String> roles_combobox;
     private javax.swing.JTextField search_textfield;
-    private javax.swing.JTextField tanggallahir_textfield;
-    private javax.swing.JTextField tempatlahir_textfield;
     private javax.swing.JButton update_button;
     private javax.swing.JTextField username_textfield;
     // End of variables declaration//GEN-END:variables
