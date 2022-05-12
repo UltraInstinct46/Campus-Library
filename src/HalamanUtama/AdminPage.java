@@ -86,7 +86,7 @@ public class AdminPage extends javax.swing.JFrame {
 
         jButton5.setText("Data Pengembalian");
 
-        jButton6.setBackground(new java.awt.Color(255, 255, 255));
+        jButton6.setBackground(new java.awt.Color(0, 255, 0));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/anggota.png"))); // NOI18N
 
         jButton7.setBackground(new java.awt.Color(255, 255, 255));
