@@ -24,6 +24,7 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
     Connection  con;
     PreparedStatement pst;
     ResultSet rs;
+    public static String usm;
 
     /**
      * Creates new form Login_CampusLibrary
@@ -57,19 +58,17 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Rockwell", 1, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("CAMPUS LIBRARY");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(290, 130, 580, 80);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 580, 80));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/logo ccit (2).png"))); // NOI18N
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 160, 120);
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 120));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 153, 255), new java.awt.Color(0, 153, 255)));
@@ -145,7 +144,7 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
                             .addComponent(txtUser))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,11 +164,10 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(360, 220, 460, 210);
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, 460, 210));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/buku-1 (2).jpg"))); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(1154, 754));
@@ -178,8 +176,7 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
                 jLabel1ComponentHidden(evt);
             }
         });
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 1180, 754);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -217,6 +214,7 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
                 if(rs.next()){
                     String s1 = rs.getString("login_type");
                     String un = rs.getString("username");
+                    usm = un;
                     if(s1.equalsIgnoreCase("admin")){
                         AdminPage ad = new AdminPage(un);
                         ad.setVisible(true);
