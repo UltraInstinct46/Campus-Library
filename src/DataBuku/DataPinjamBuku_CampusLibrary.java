@@ -363,6 +363,7 @@ public class DataPinjamBuku_CampusLibrary extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         pinjam();
+        showCombobox();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void kategori_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategori_textfieldActionPerformed

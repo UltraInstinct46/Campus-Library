@@ -122,7 +122,7 @@ public class DataPengembalianBuku_CampusLibrary extends javax.swing.JFrame {
         try{
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
             stm = con.createStatement();
-            res=stm.executeQuery("SELECT id_buku,judul_buku FROM data_buku");
+            res=stm.executeQuery("SELECT data_peminjambuku.id_buku,data_buku.judul_buku FROM data_peminjambuku INNER JOIN data_buku ON data_peminjambuku.id_buku = data_buku.id_buku WHERE data_peminjambuku.status='Belum Dikembalikan' AND data_peminjambuku.username ='"+Login_CampusLibrary.usm+"'");
             while(res.next()){
             dm.addElement(res.getString(2));
         }
@@ -155,7 +155,7 @@ public class DataPengembalianBuku_CampusLibrary extends javax.swing.JFrame {
             String SQL = "UPDATE data_peminjambuku SET "
                     + "status='"+"Sudah Dikembalikan"+"',"
                     + "tgl_pengembalian='"+java.time.LocalDate.now()+"' "
-                    + "WHERE username='"+Login_CampusLibrary.usm+"' AND id_buku="+id;
+                    + "WHERE username='"+Login_CampusLibrary.usm+"' AND id_buku="+id+" AND status='Belum Dikembalikan'";
             stm.execute(SQL);
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Failed "  + e);
@@ -429,6 +429,7 @@ public class DataPengembalianBuku_CampusLibrary extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         pengembalian();
+        showCombobox();
 //        createData();
     }//GEN-LAST:event_jButton3ActionPerformed
 
