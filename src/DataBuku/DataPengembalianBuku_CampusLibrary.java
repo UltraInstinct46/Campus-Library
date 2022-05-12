@@ -6,8 +6,16 @@ package DataBuku;
 
 import Member.*;
 import Conection.Connectionc;
+import static DataBuku.DataPinjamBuku_CampusLibrary.con;
+import static DataBuku.DataPinjamBuku_CampusLibrary.id;
+import static DataBuku.DataPinjamBuku_CampusLibrary.stm;
 import java.sql.*;
 import REGISTER.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
@@ -21,121 +29,136 @@ public class DataPengembalianBuku_CampusLibrary extends javax.swing.JFrame {
     public static Connection con;
     public static Statement stm;
     public static ResultSet res;
-    public static DefaultTableModel tb;
+    public static DefaultComboBoxModel dm;
+    public static int id;
     Connectionc connection = new Connectionc();
     /**
      * Creates new form Register_CampusLibrary
      */
-    public void search(){
-        tb = new DefaultTableModel();
-        tb.addColumn("id_anggota");
-        tb.addColumn("NIM");
-        tb.addColumn("nama_anggota");
-        tb.addColumn("kelas");
-        tb.addColumn("tempat_lahir");
-        tb.addColumn("tanggal_lahir");
-        Member_Table.setModel(tb);
-        String text = search_textfield.getText();
-        
-        try{
-            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
-            stm = con.createStatement();
-            res=stm.executeQuery("SELECT * FROM data_anggota WHERE nama_anggota LIKE '%"+text+"%'");
-            while(res.next()){
-            tb.addRow(new Object[] {
-                res.getString(1),
-                res.getString(2),
-                res.getString(3),
-                res.getString(4),
-                res.getString(5),
-                res.getString(6),
-            });
-        }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Failed "  + e);
-        }
-        
-    }
-    public void updateData(){
-            String SQL = "UPDATE data_anggota SET "
-                    + "NIM='"+nim_textfield.getText()+"',"
-                    + "nama_anggota='"+nama_textfield.getText()+"',kelas='"+kelas_combobox.getSelectedItem().toString()+"',"
-                    + "tempat_lahir='"+tempatlahir_textfield.getText()+"',"
-                    + "tanggal_lahir='"+tanggallahir_textfield.getText()+"' "
-                    + "WHERE id_anggota='"+id_textfield.getText()+"'";
-        try{
-            stm.execute(SQL);
-            showTable();
-        }catch(Exception e){
-                JOptionPane.showMessageDialog(null,"Failed "  + e);
-        }
-    }
-        public void createData(){
-            String SQL = "INSERT INTO data_anggota (NIM,nama_anggota,kelas,tempat_lahir,tanggal_lahir) "
-                    + "VALUES('"+nim_textfield.getText()+"','"+nama_textfield.getText()+"','"+kelas_combobox.getSelectedItem().toString()+"',"
-                    + "'"+tempatlahir_textfield.getText()+"','"+tanggallahir_textfield.getText()+"')";
-        try{
-            stm.execute(SQL);
-            showTable();
-        }catch(Exception e){
-                JOptionPane.showMessageDialog(null,"Failed "  + e);
-        }
-    }
-    
-    public void deleteData(){
-        int baris = Member_Table.getSelectedRow();
-        if (baris != -1) {
-            String id = Member_Table.getValueAt(baris, 0).toString();
-            String SQL = "DELETE FROM data_anggota WHERE id_anggota ='"+id+"'";
-            try{
-             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
-             stm = con.createStatement();
-             stm.executeUpdate(SQL);   
-             showTable();
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(null,"Failed "  + e);
-            }
-            }
-//            if (status==1) {
-//                JOptionPane.showMessageDialog(this, "Data berhasil dihapus", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-//                                showTable();
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Data gagal dihapus", "Gagal", JOptionPane.WARNING_MESSAGE);
-//
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Pilih Baris Data Terlebih dahulu", "Error", JOptionPane.WARNING_MESSAGE);
+//    public void search(){
+//        tb = new DefaultTableModel();
+//        tb.addColumn("id_anggota");
+//        tb.addColumn("NIM");
+//        tb.addColumn("nama_anggota");
+//        tb.addColumn("kelas");
+//        tb.addColumn("tempat_lahir");
+//        tb.addColumn("tanggal_lahir");
+//        Member_Table.setModel(tb);
+//        String text = search_textfield.getText();
+//        
+//        try{
+//            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
+//            stm = con.createStatement();
+//            res=stm.executeQuery("SELECT * FROM data_anggota WHERE nama_anggota LIKE '%"+text+"%'");
+//            while(res.next()){
+//            tb.addRow(new Object[] {
+//                res.getString(1),
+//                res.getString(2),
+//                res.getString(3),
+//                res.getString(4),
+//                res.getString(5),
+//                res.getString(6),
+//            });
 //        }
-    }
-    public void showTable(){
-        tb = new DefaultTableModel();
-        tb.addColumn("id_anggota");
-        tb.addColumn("NIM");
-        tb.addColumn("nama_anggota");
-        tb.addColumn("kelas");
-        tb.addColumn("tempat_lahir");
-        tb.addColumn("tanggal_lahir");
-        Member_Table.setModel(tb);
-        
-        
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(null,"Failed "  + e);
+//        }
+//        
+//    }
+//    public void updateData(){
+//            String SQL = "UPDATE data_anggota SET "
+//                    + "NIM='"+nim_textfield.getText()+"',"
+//                    + "nama_anggota='"+nama_textfield.getText()+"',kelas='"+kelas_combobox.getSelectedItem().toString()+"',"
+//                    + "tempat_lahir='"+tempatlahir_textfield.getText()+"',"
+//                    + "tanggal_lahir='"+tanggallahir_textfield.getText()+"' "
+//                    + "WHERE id_anggota='"+id_textfield.getText()+"'";
+//        try{
+//            stm.execute(SQL);
+//            showTable();
+//        }catch(Exception e){
+//                JOptionPane.showMessageDialog(null,"Failed "  + e);
+//        }
+//    }
+//        public void createData(){
+//            String SQL = "INSERT INTO data_anggota (NIM,nama_anggota,kelas,tempat_lahir,tanggal_lahir) "
+//                    + "VALUES('"+nim_textfield.getText()+"','"+nama_textfield.getText()+"','"+kelas_combobox.getSelectedItem().toString()+"',"
+//                    + "'"+tempatlahir_textfield.getText()+"','"+tanggallahir_textfield.getText()+"')";
+//        try{
+//            stm.execute(SQL);
+//            showTable();
+//        }catch(Exception e){
+//                JOptionPane.showMessageDialog(null,"Failed "  + e);
+//        }
+//    }
+    
+//    public void deleteData(){
+//        int baris = Member_Table.getSelectedRow();
+//        if (baris != -1) {
+//            String id = Member_Table.getValueAt(baris, 0).toString();
+//            String SQL = "DELETE FROM data_anggota WHERE id_anggota ='"+id+"'";
+//            try{
+//             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
+//             stm = con.createStatement();
+//             stm.executeUpdate(SQL);   
+//             showTable();
+//            }catch(Exception e){
+//                JOptionPane.showMessageDialog(null,"Failed "  + e);
+//            }
+//            }
+////            if (status==1) {
+////                JOptionPane.showMessageDialog(this, "Data berhasil dihapus", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+////                                showTable();
+////            } else {
+////                JOptionPane.showMessageDialog(this, "Data gagal dihapus", "Gagal", JOptionPane.WARNING_MESSAGE);
+////
+////            }
+////        } else {
+////            JOptionPane.showMessageDialog(this, "Pilih Baris Data Terlebih dahulu", "Error", JOptionPane.WARNING_MESSAGE);
+////        }
+//    }
+    public void showCombobox(){
+        dm=new DefaultComboBoxModel();
         try{
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
             stm = con.createStatement();
-            res=stm.executeQuery("SELECT * FROM data_anggota");
+            res=stm.executeQuery("SELECT id_buku,judul_buku FROM data_buku");
             while(res.next()){
-            tb.addRow(new Object[] {
-                res.getString(1),
-                res.getString(2),
-                res.getString(3),
-                res.getString(4),
-                res.getString(5),
-                res.getString(6),
-            });
+            dm.addElement(res.getString(2));
         }
+            kelas_combobox.setModel(dm);
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Failed "  + e);
         }
         
+    }
+    public void showData(){
+        try{
+            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
+            stm = con.createStatement();
+            res=stm.executeQuery("SELECT * FROM data_buku where judul_buku='"+kelas_combobox.getSelectedItem().toString()+"'");
+            while(res.next()){
+            id=Integer.parseInt(res.getString(1));
+            penerbit_textfield.setText(res.getString(3));
+            pengarang_textfield.setText(res.getString(4));
+            tahunterbit_textfield.setText(res.getString(5));
+            kategori_textfield.setText(res.getString(6));
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Failed "  + e);
+        }
+    }
+        public void pengembalian(){
+        try{
+            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
+            stm = con.createStatement();
+            String SQL = "UPDATE data_peminjambuku SET "
+                    + "status='"+"Sudah Dikembalikan"+"',"
+                    + "tgl_pengembalian='"+java.time.LocalDate.now()+"' "
+                    + "WHERE username='"+"username"+"' AND id_buku="+id;
+            stm.execute(SQL);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Failed "  + e);
+        }
     }
 
     /**
@@ -144,8 +167,25 @@ public class DataPengembalianBuku_CampusLibrary extends javax.swing.JFrame {
     public DataPengembalianBuku_CampusLibrary() {
         initComponents();
         connection.setKoneksi();
-        showTable();
+        showCombobox();
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
+        kelas_combobox.addItemListener(event -> {
+        // The item affected by the event.
+        String item = (String) event.getItem();
+        if (event.getStateChange() == ItemEvent.SELECTED) {
+            showData();
+        }
+        if (event.getStateChange() == ItemEvent.DESELECTED) {
+//            showData();
+         
+        }
+        });
+//        kelas_combobox.addItemListener ((ItemListener) new ActionListener () {
+//        public void actionPerformed(ActionEvent e) {
+//        kelas_combobox.getSelectedItem().toString();
+//        jLabel3.setText(kelas_combobox.getSelectedItem().toString());
+//      }
+//});
     }
 
     /**
@@ -166,13 +206,13 @@ public class DataPengembalianBuku_CampusLibrary extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         kelas_combobox = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        nim_textfield = new javax.swing.JTextField();
+        penerbit_textfield = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        nama_textfield = new javax.swing.JTextField();
+        pengarang_textfield = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        id_textfield = new javax.swing.JTextField();
+        tahunterbit_textfield = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        tempatlahir_textfield = new javax.swing.JTextField();
+        kategori_textfield = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -236,37 +276,40 @@ public class DataPengembalianBuku_CampusLibrary extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("PENERBIT");
 
-        nim_textfield.setBackground(new java.awt.Color(255, 255, 255));
-        nim_textfield.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        nim_textfield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        penerbit_textfield.setEditable(false);
+        penerbit_textfield.setBackground(new java.awt.Color(255, 255, 255));
+        penerbit_textfield.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
+        penerbit_textfield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel4.setFont(new java.awt.Font("Calisto MT", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("PENGARANG");
 
-        nama_textfield.setBackground(new java.awt.Color(255, 255, 255));
-        nama_textfield.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        nama_textfield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pengarang_textfield.setEditable(false);
+        pengarang_textfield.setBackground(new java.awt.Color(255, 255, 255));
+        pengarang_textfield.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
+        pengarang_textfield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel5.setFont(new java.awt.Font("Calisto MT", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("TAHUN TERBIT");
 
-        id_textfield.setEditable(false);
-        id_textfield.setBackground(new java.awt.Color(255, 255, 255));
-        id_textfield.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        id_textfield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tahunterbit_textfield.setEditable(false);
+        tahunterbit_textfield.setBackground(new java.awt.Color(255, 255, 255));
+        tahunterbit_textfield.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
+        tahunterbit_textfield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel9.setFont(new java.awt.Font("Calisto MT", 0, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("KATEGORI");
 
-        tempatlahir_textfield.setBackground(new java.awt.Color(255, 255, 255));
-        tempatlahir_textfield.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
-        tempatlahir_textfield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        tempatlahir_textfield.addActionListener(new java.awt.event.ActionListener() {
+        kategori_textfield.setEditable(false);
+        kategori_textfield.setBackground(new java.awt.Color(255, 255, 255));
+        kategori_textfield.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 14)); // NOI18N
+        kategori_textfield.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        kategori_textfield.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tempatlahir_textfieldActionPerformed(evt);
+                kategori_textfieldActionPerformed(evt);
             }
         });
 
@@ -280,19 +323,19 @@ public class DataPengembalianBuku_CampusLibrary extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tempatlahir_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(kategori_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(id_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tahunterbit_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(nama_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pengarang_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(nim_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(penerbit_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(101, 101, 101)
@@ -309,18 +352,18 @@ public class DataPengembalianBuku_CampusLibrary extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nim_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(penerbit_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nama_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pengarang_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(id_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tahunterbit_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tempatlahir_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(kategori_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
@@ -379,17 +422,18 @@ public class DataPengembalianBuku_CampusLibrary extends javax.swing.JFrame {
 
     private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
         // TODO add your handling code here:
-        updateData();
+//        updateData();
     }//GEN-LAST:event_update_buttonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        createData();
+        pengembalian();
+//        createData();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void tempatlahir_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tempatlahir_textfieldActionPerformed
+    private void kategori_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategori_textfieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tempatlahir_textfieldActionPerformed
+    }//GEN-LAST:event_kategori_textfieldActionPerformed
 
     private void kelas_comboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kelas_comboboxActionPerformed
         // TODO add your handling code here:
@@ -686,7 +730,6 @@ public class DataPengembalianBuku_CampusLibrary extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField id_textfield;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -697,10 +740,11 @@ public class DataPengembalianBuku_CampusLibrary extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField kategori_textfield;
     private javax.swing.JComboBox<String> kelas_combobox;
-    private javax.swing.JTextField nama_textfield;
-    private javax.swing.JTextField nim_textfield;
-    private javax.swing.JTextField tempatlahir_textfield;
+    private javax.swing.JTextField penerbit_textfield;
+    private javax.swing.JTextField pengarang_textfield;
+    private javax.swing.JTextField tahunterbit_textfield;
     private javax.swing.JButton update_button;
     // End of variables declaration//GEN-END:variables
 }
