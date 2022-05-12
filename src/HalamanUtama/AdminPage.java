@@ -9,6 +9,7 @@ import DataBuku.DataPeminjaman;
 import DataBuku.DataPengembalianBuku_CampusLibrary;
 import DataBuku.DataPinjamBuku_CampusLibrary;
 import DataPetugas.DataPetugas_CampusLibrary;
+import Login.Login_CampusLibrary;
 import Member.MembersData;
 import REGISTER.UserData;
 import javax.swing.JOptionPane;
@@ -296,7 +297,9 @@ public class AdminPage extends javax.swing.JFrame {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
     if(JOptionPane.showConfirmDialog(null,"Yakin Log Out?","Yakin?",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
-            System.exit(0);
+            Login_CampusLibrary lg = new Login_CampusLibrary();
+            lg.setVisible(true);
+            this.setVisible(false);
     }
     }//GEN-LAST:event_jButton11ActionPerformed
 
