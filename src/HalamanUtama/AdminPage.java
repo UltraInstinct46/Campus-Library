@@ -8,6 +8,7 @@ import DataBuku.DataPengembalianBuku_CampusLibrary;
 import DataBuku.DataPinjamBuku_CampusLibrary;
 import DataPetugas.DataPetugas_CampusLibrary;
 import Member.MembersData;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -128,6 +129,11 @@ public class AdminPage extends javax.swing.JFrame {
         jButton11.setForeground(new java.awt.Color(0, 0, 0));
         jButton11.setText("Log Out");
         jButton11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -280,6 +286,12 @@ public class AdminPage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+    if(JOptionPane.showConfirmDialog(null,"Yakin Log Out?","Yakin?",JOptionPane.Yes_No_Option)==JOptionPane.YesOption){
+            System.exit(0);
+    }//GEN-LAST:event_jButton11ActionPerformed
+    }
     /**
      * @param args the command line arguments
      */
