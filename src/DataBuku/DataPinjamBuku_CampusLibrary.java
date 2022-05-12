@@ -10,6 +10,7 @@ import static DataBuku.DataPengembalianBuku_CampusLibrary.con;
 import static DataBuku.DataPengembalianBuku_CampusLibrary.dm;
 import static DataBuku.DataPengembalianBuku_CampusLibrary.res;
 import static DataBuku.DataPengembalianBuku_CampusLibrary.stm;
+import Login.Login_CampusLibrary;
 import java.sql.*;
 import REGISTER.*;
 import java.awt.event.ItemEvent;
@@ -71,7 +72,7 @@ public class DataPinjamBuku_CampusLibrary extends javax.swing.JFrame {
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
             stm = con.createStatement();
             String SQL = "INSERT INTO data_peminjambuku (username,id_buku,status,tgl_pinjam) "
-                    + "VALUES('"+"username"+"','"+id+"','"+"Belum Dikembalikan"+"',"
+                    + "VALUES('"+Login_CampusLibrary.usm+"','"+id+"','"+"Belum Dikembalikan"+"',"
                     + "'"+java.time.LocalDate.now()+"')";
             stm.execute(SQL);
         }catch(Exception e){
