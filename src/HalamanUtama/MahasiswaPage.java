@@ -6,6 +6,7 @@ package HalamanUtama;
 
 import DataBuku.DataPengembalianBuku_CampusLibrary;
 import DataBuku.DataPinjamBuku_CampusLibrary;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -174,6 +175,9 @@ public class MahasiswaPage extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        if(JOptionPane.showConfirmDialog(null,"Yakin Log Out?","Yakin?",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+            System.exit(0);
+    }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
