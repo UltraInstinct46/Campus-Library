@@ -4,6 +4,8 @@
  */
 package HalamanUtama;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author LENOVO
@@ -61,6 +63,7 @@ public class MahasiswaPage extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("PERPUSTAKAAN KAMPUS");
 
         jPanel2.setBackground(new java.awt.Color(0, 204, 204));
 
@@ -161,6 +164,15 @@ public class MahasiswaPage extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        if(JOptionPane.showConfirmDialog(null,"APAKAH ANDA YAKIN UNTUK LOGOUT?"+"JIKA IYA, TEKAN OK","Information",
+            JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION){
+        try{
+            this.dispose();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog (null, e.getMessage());
+        }
+    }
+    }       
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
