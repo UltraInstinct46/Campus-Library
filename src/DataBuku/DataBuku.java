@@ -106,7 +106,7 @@ public class DataBuku extends javax.swing.JFrame {
 //                JOptionPane.showMessageDialog(this, "Data gagal dihapus", "Gagal", JOptionPane.WARNING_MESSAGE);
 //
 //            }
-//        } else {
+//        } else {lu 
 //            JOptionPane.showMessageDialog(this, "Pilih Baris Data Terlebih dahulu", "Error", JOptionPane.WARNING_MESSAGE);
 //        }
     }

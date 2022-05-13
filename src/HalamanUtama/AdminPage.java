@@ -8,6 +8,7 @@ import DataBuku.DataPengembalianBuku_Mahasiswa;
 import DataBuku.DataPinjamBuku_Mahasiwa;
 import DataPetugas.DataPetugas_CampusLibrary;
 import Member.MembersData;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -128,6 +129,11 @@ public class AdminPage extends javax.swing.JFrame {
         jButton11.setForeground(new java.awt.Color(0, 0, 0));
         jButton11.setText("Log Out");
         jButton11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -279,6 +285,18 @@ public class AdminPage extends javax.swing.JFrame {
         dp.setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // SYNTAX UNTUK LOG OUT
+    if(JOptionPane.showConfirmDialog(null,"APAKAH ANDA YAKIN UNTUK LOGOUT?"+"JIKA IYA, TEKAN OK","Information",
+            JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION){
+        try{
+            this.dispose();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog (null, e.getMessage());
+        }
+    }
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments
