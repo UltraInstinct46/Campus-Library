@@ -49,7 +49,7 @@ public class MembersData extends javax.swing.JFrame {
                 res.getString(4),
                 res.getString(5),
                 res.getString(6),
-                res.getString(7),
+                res.getString(6),
             });
         }
         }catch(Exception e){
