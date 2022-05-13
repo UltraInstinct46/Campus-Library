@@ -21,6 +21,7 @@ public class MembersData extends javax.swing.JFrame {
     public static Statement stm;
     public static ResultSet res;
     public static DefaultTableModel tb;
+    public static int id;
     Connectionc connection = new Connectionc();
     /**
      * Creates new form Register_CampusLibrary
@@ -135,6 +136,7 @@ public class MembersData extends javax.swing.JFrame {
                 res.getString(6),
                 res.getString(7),
             });
+            id=Integer.parseInt(res.getString(1));
         }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Failed "  + e);
@@ -150,6 +152,7 @@ public class MembersData extends javax.swing.JFrame {
         connection.setKoneksi();
         showTable();
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
+        id_textfield.setText(""+(id+1));
     }
 
     /**
@@ -161,6 +164,7 @@ public class MembersData extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDayChooser1 = new com.toedter.calendar.JDayChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -560,6 +564,7 @@ public class MembersData extends javax.swing.JFrame {
     private javax.swing.JButton delete_button;
     private javax.swing.JTextField id_textfield;
     private javax.swing.JButton jButton3;
+    private com.toedter.calendar.JDayChooser jDayChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

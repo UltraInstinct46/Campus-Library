@@ -172,7 +172,6 @@ public class MahasiswaPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog (null, e.getMessage());
         }
     }
-    }       
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
