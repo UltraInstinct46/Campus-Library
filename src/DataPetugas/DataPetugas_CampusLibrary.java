@@ -57,7 +57,7 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
     
     }
     public void updateData(){
-            String SQL = "UPDATE data_petugas SET"
+            String SQL = "UPDATE data_petugas SET "
                 +"username='"+username_textfield.getText()+"',"
                 +"nama_petugas='"+nama_textfield.getText()+"',"
                 +"alamat='"+alamat_textfield.getText()+"',"
