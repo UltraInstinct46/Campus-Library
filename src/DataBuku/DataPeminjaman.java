@@ -6,8 +6,11 @@ package DataBuku;
 
 import Member.*;
 import Conection.Connectionc;
+import static Member.MembersData.sdf;
+import static Member.MembersData.tb;
 import java.sql.*;
 import REGISTER.*;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
@@ -23,6 +26,7 @@ public class DataPeminjaman extends javax.swing.JFrame {
     public static ResultSet res;
     public static DefaultTableModel tb;
     public static int id;
+    public static SimpleDateFormat sdf;
     Connectionc connection = new Connectionc();
     /**
      * Creates new form Register_CampusLibrary
@@ -58,11 +62,14 @@ public class DataPeminjaman extends javax.swing.JFrame {
         
     }
     public void updateData(){
+            sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String datepinjam = sdf.format(tglpinjam_date.getDate());
+            String datepengembalian = sdf.format(tglpengembalian_date.getDate());
             String SQL = "UPDATE data_peminjambuku SET "
                     + "username='"+username_textfield.getText()+"',"
                     + "id_buku='"+idbuku_textfield.getText()+"',"
-                    + "status='"+status_combobox.getSelectedItem().toString()+"',tgl_pinjam='"+tglpinjam_textfield.getText()+"',"
-                    + "tgl_pengembalian='"+tglpengembalian_textfield.getText()+"' "
+                    + "status='"+status_combobox.getSelectedItem().toString()+"',tgl_pinjam='"+datepinjam+"',"
+                    + "tgl_pengembalian='"+datepengembalian+"' "
                     + "WHERE id_peminjam='"+idpeminjam_textfield.getText()+"'";
         try{
             stm.execute(SQL);
@@ -168,12 +175,10 @@ public class DataPeminjaman extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         username_textfield = new javax.swing.JTextField();
         delete_button = new javax.swing.JButton();
-        tglpinjam_textfield = new javax.swing.JTextField();
         update_button = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Peminjam_Table = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
-        tglpengembalian_textfield = new javax.swing.JTextField();
         search_textfield = new javax.swing.JTextField();
         status_combobox = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
@@ -181,6 +186,8 @@ public class DataPeminjaman extends javax.swing.JFrame {
         idbuku_textfield = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         idpeminjam_textfield = new javax.swing.JLabel();
+        tglpinjam_date = new com.toedter.calendar.JDateChooser();
+        tglpengembalian_date = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -224,8 +231,6 @@ public class DataPeminjaman extends javax.swing.JFrame {
             }
         });
 
-        tglpinjam_textfield.setBackground(new java.awt.Color(255, 255, 255));
-
         update_button.setBackground(new java.awt.Color(204, 204, 204));
         update_button.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         update_button.setForeground(new java.awt.Color(51, 51, 51));
@@ -257,13 +262,6 @@ public class DataPeminjaman extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("TGL PENGEMBALIAN");
-
-        tglpengembalian_textfield.setBackground(new java.awt.Color(255, 255, 255));
-        tglpengembalian_textfield.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tglpengembalian_textfieldActionPerformed(evt);
-            }
-        });
 
         search_textfield.setBackground(new java.awt.Color(255, 255, 255));
         search_textfield.addActionListener(new java.awt.event.ActionListener() {
@@ -306,6 +304,12 @@ public class DataPeminjaman extends javax.swing.JFrame {
         idpeminjam_textfield.setText("ID");
         idpeminjam_textfield.setPreferredSize(new java.awt.Dimension(72, 29));
 
+        tglpinjam_date.setBackground(new java.awt.Color(255, 255, 255));
+        tglpinjam_date.setForeground(new java.awt.Color(255, 255, 255));
+
+        tglpengembalian_date.setBackground(new java.awt.Color(255, 255, 255));
+        tglpengembalian_date.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -319,10 +323,7 @@ public class DataPeminjaman extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(95, 95, 95)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(status_combobox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tglpengembalian_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tglpinjam_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(status_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel7)
@@ -335,7 +336,9 @@ public class DataPeminjaman extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(idpeminjam_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(username_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(username_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(tglpinjam_date, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tglpengembalian_date, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(249, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 197, Short.MAX_VALUE)
@@ -379,20 +382,17 @@ public class DataPeminjaman extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(idbuku_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(status_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(status_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(tglpinjam_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabel9))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(tglpengembalian_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel5)
+                    .addComponent(tglpinjam_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(tglpengembalian_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(search_textfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -431,10 +431,6 @@ public class DataPeminjaman extends javax.swing.JFrame {
         updateData();
     }//GEN-LAST:event_update_buttonActionPerformed
 
-    private void tglpengembalian_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tglpengembalian_textfieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tglpengembalian_textfieldActionPerformed
-
     private void status_comboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_status_comboboxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_status_comboboxActionPerformed
@@ -451,11 +447,17 @@ public class DataPeminjaman extends javax.swing.JFrame {
             idpeminjam_textfield.setText(tb.getValueAt(i,0).toString());
             username_textfield.setText(tb.getValueAt(i,1).toString());
             idbuku_textfield.setText(tb.getValueAt(i,2).toString());
-            tglpinjam_textfield.setText(tb.getValueAt(i,4).toString());
             try{
-            tglpengembalian_textfield.setText(tb.getValueAt(i,5).toString());
+            java.util.Date datepinjam = new SimpleDateFormat("yyyy-MM-dd").parse((String)tb.getValueAt(i, 4));   
+            tglpinjam_date.setDate(datepinjam);
+            try{
+            java.util.Date datepengembalian = new SimpleDateFormat("yyyy-MM-dd").parse((String)tb.getValueAt(i, 5));   
+            tglpengembalian_date.setDate(datepengembalian);
             }catch(Exception e){
-                tglpengembalian_textfield.setText("");
+            tglpengembalian_date.setDate(null);
+            }
+            }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
             }
         }
     }//GEN-LAST:event_Peminjam_TableMouseClicked
@@ -533,8 +535,8 @@ public class DataPeminjaman extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField search_textfield;
     private javax.swing.JComboBox<String> status_combobox;
-    private javax.swing.JTextField tglpengembalian_textfield;
-    private javax.swing.JTextField tglpinjam_textfield;
+    private com.toedter.calendar.JDateChooser tglpengembalian_date;
+    private com.toedter.calendar.JDateChooser tglpinjam_date;
     private javax.swing.JButton update_button;
     private javax.swing.JTextField username_textfield;
     // End of variables declaration//GEN-END:variables

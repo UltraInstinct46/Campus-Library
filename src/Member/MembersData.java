@@ -6,7 +6,7 @@ package Member;
 
 import Conection.Connectionc;
 import java.sql.*;
-import REGISTER.*;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
@@ -22,6 +22,7 @@ public class MembersData extends javax.swing.JFrame {
     public static ResultSet res;
     public static DefaultTableModel tb;
     public static int id;
+    public static SimpleDateFormat sdf;
     Connectionc connection = new Connectionc();
     /**
      * Creates new form Register_CampusLibrary
@@ -50,7 +51,7 @@ public class MembersData extends javax.swing.JFrame {
                 res.getString(4),
                 res.getString(5),
                 res.getString(6),
-                res.getString(6),
+                res.getString(7),
             });
         }
         }catch(Exception e){
@@ -59,12 +60,14 @@ public class MembersData extends javax.swing.JFrame {
         
     }
     public void updateData(){
+            sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String date = sdf.format(tgl_date.getDate());
             String SQL = "UPDATE data_anggota SET "
                     + "NIM='"+nim_textfield.getText()+"',"
                     + "username='"+username_textfield.getText()+"',"
                     + "nama_anggota='"+nama_textfield.getText()+"',kelas='"+kelas_combobox.getSelectedItem().toString()+"',"
                     + "tempat_lahir='"+tempatlahir_textfield.getText()+"',"
-                    + "tanggal_lahir='"+tanggallahir_textfield.getText()+"' "
+                    + "tanggal_lahir='"+date+"' "
                     + "WHERE id_anggota='"+jLabel8.getText()+"'";
         try{
             stm.execute(SQL);
@@ -74,9 +77,11 @@ public class MembersData extends javax.swing.JFrame {
         }
     }
         public void createData(){
+            sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String date = sdf.format(tgl_date.getDate());
             String SQL = "INSERT INTO data_anggota (NIM,username,nama_anggota,kelas,tempat_lahir,tanggal_lahir) "
                     + "VALUES('"+nim_textfield.getText()+"','"+username_textfield.getText()+"','"+nama_textfield.getText()+"','"+kelas_combobox.getSelectedItem().toString()+"',"
-                    + "'"+tempatlahir_textfield.getText()+"','"+tanggallahir_textfield.getText()+"')";
+                    + "'"+tempatlahir_textfield.getText()+"','"+date+"')";
         try{
             stm.execute(SQL);
             showTable();
@@ -183,12 +188,12 @@ public class MembersData extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         search_textfield = new javax.swing.JTextField();
         kelas_combobox = new javax.swing.JComboBox<>();
-        tanggallahir_textfield = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         username_textfield = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        tgl_date = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -314,13 +319,6 @@ public class MembersData extends javax.swing.JFrame {
             }
         });
 
-        tanggallahir_textfield.setBackground(new java.awt.Color(255, 255, 255));
-        tanggallahir_textfield.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tanggallahir_textfieldActionPerformed(evt);
-            }
-        });
-
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/logo ccit (2).png"))); // NOI18N
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/search (2) (1).png"))); // NOI18N
@@ -336,6 +334,9 @@ public class MembersData extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("ID");
         jLabel8.setPreferredSize(new java.awt.Dimension(72, 29));
+
+        tgl_date.setBackground(new java.awt.Color(255, 255, 255));
+        tgl_date.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -355,7 +356,7 @@ public class MembersData extends javax.swing.JFrame {
                         .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 197, Short.MAX_VALUE)
+                .addGap(52, 197, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(48, 48, 48)
@@ -366,17 +367,17 @@ public class MembersData extends javax.swing.JFrame {
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel4)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(kelas_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(nama_textfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tanggallahir_textfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tempatlahir_textfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(username_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(username_textfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(nim_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(nim_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tgl_date, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -426,9 +427,9 @@ public class MembersData extends javax.swing.JFrame {
                                 .addGap(13, 13, 13)
                                 .addComponent(kelas_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(tempatlahir_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tanggallahir_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(tempatlahir_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tgl_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(search_textfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -482,14 +483,9 @@ public class MembersData extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_kelas_comboboxActionPerformed
 
-    private void tanggallahir_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tanggallahir_textfieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tanggallahir_textfieldActionPerformed
-
     private void Member_TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Member_TableMouseClicked
         // TODO add your handling code here:
         int i = Member_Table.getSelectedRow();
-        String kelas;
         if(i>-1){
             if(tb.getValueAt(i,3).toString().equals("2wd1")){
                 kelas_combobox.setSelectedIndex(1);
@@ -503,7 +499,12 @@ public class MembersData extends javax.swing.JFrame {
             username_textfield.setText(tb.getValueAt(i,2).toString());
             nama_textfield.setText(tb.getValueAt(i,3).toString());
             tempatlahir_textfield.setText(tb.getValueAt(i,5).toString());
-            tanggallahir_textfield.setText(tb.getValueAt(i,6).toString());
+            try{
+            java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String)tb.getValueAt(i, 6));   
+            tgl_date.setDate(date);
+            }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+            }
         }
     }//GEN-LAST:event_Member_TableMouseClicked
 
@@ -580,8 +581,8 @@ public class MembersData extends javax.swing.JFrame {
     private javax.swing.JTextField nama_textfield;
     private javax.swing.JTextField nim_textfield;
     private javax.swing.JTextField search_textfield;
-    private javax.swing.JTextField tanggallahir_textfield;
     private javax.swing.JTextField tempatlahir_textfield;
+    private com.toedter.calendar.JDateChooser tgl_date;
     private javax.swing.JButton update_button;
     private javax.swing.JTextField username_textfield;
     // End of variables declaration//GEN-END:variables
