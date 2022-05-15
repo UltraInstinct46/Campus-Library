@@ -72,7 +72,7 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
     
     public void createData(){
             String SQL = "INSERT INTO data_petugas (nama_petugas,username,alamat,no_telp) "
-                    + "VALUES('"+nama_textfield.getText()+"','"+username_textfield.getText()+"','"+alamat_textfield.getText()+"','"+noTelp_textfield+"',)";
+                    + "VALUES('"+nama_textfield.getText()+"','"+username_textfield.getText()+"','"+alamat_textfield.getText()+"','"+noTelp_textfield+"')";
                    
         try{
             stm.execute(SQL);
@@ -232,6 +232,7 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
         nama_textfield.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         nama_textfield.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
 
+        id_textfield.setEditable(false);
         id_textfield.setBackground(new java.awt.Color(255, 255, 255));
         id_textfield.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         id_textfield.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
