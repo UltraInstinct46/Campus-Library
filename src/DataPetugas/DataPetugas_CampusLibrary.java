@@ -5,6 +5,7 @@
 package DataPetugas;
 
 import Conection.Connectionc;
+import static Member.MembersData.id;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import javax.swing.JOptionPane;
@@ -19,6 +20,7 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
     public static Statement stm;
     public static ResultSet rs;
     public static DefaultTableModel tb;
+    public static int id;
     Connectionc connection = new Connectionc();
     
     /**
@@ -59,8 +61,8 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
                 +"username='"+username_textfield.getText()+"',"
                 +"nama_petugas='"+nama_textfield.getText()+"',"
                 +"alamat='"+alamat_textfield.getText()+"',"
-                +"no_telp='"+noTelp_textfield.getText()+"',"
-                +"WHERE id_petugas='"+id_textfield.getText()+"'";
+                +"no_telp='"+noTelp_textfield.getText()+"' "
+                +"WHERE id_petugas='"+id_label.getText()+"'";
     
         try{
             stm.execute(SQL);
@@ -72,7 +74,7 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
     
     public void createData(){
             String SQL = "INSERT INTO data_petugas (nama_petugas,username,alamat,no_telp) "
-                    + "VALUES('"+nama_textfield.getText()+"','"+username_textfield.getText()+"','"+alamat_textfield.getText()+"','"+noTelp_textfield+"',)";
+                    + "VALUES('"+nama_textfield.getText()+"','"+username_textfield.getText()+"','"+alamat_textfield.getText()+"','"+noTelp_textfield.getText()+"')";
                    
         try{
             stm.execute(SQL);
@@ -125,6 +127,7 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
                 rs.getString(5),
                 
             });
+            id=Integer.parseInt(rs.getString(1));
         }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Failed "  + e);
@@ -140,6 +143,7 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
         connection.setKoneksi();
         showTable();
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
+        id_label.setText(""+(id+1));
     }
 
     /**
@@ -162,7 +166,6 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         nama_textfield = new javax.swing.JTextField();
-        id_textfield = new javax.swing.JTextField();
         alamat_textfield = new javax.swing.JTextField();
         noTelp_textfield = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
@@ -172,6 +175,7 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
         Admin_table = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         username_textfield = new javax.swing.JTextField();
+        id_label = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 204, 255));
@@ -232,10 +236,6 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
         nama_textfield.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         nama_textfield.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
 
-        id_textfield.setBackground(new java.awt.Color(255, 255, 255));
-        id_textfield.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
-        id_textfield.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
-
         alamat_textfield.setBackground(new java.awt.Color(255, 255, 255));
         alamat_textfield.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         alamat_textfield.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
@@ -295,6 +295,10 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
         username_textfield.setFont(new java.awt.Font("Microsoft JhengHei", 1, 14)); // NOI18N
         username_textfield.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
 
+        id_label.setFont(new java.awt.Font("Microsoft JhengHei", 1, 18)); // NOI18N
+        id_label.setForeground(new java.awt.Color(0, 0, 0));
+        id_label.setText("ID");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -322,14 +326,6 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(441, 441, 441)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nama_textfield)
-                            .addComponent(alamat_textfield)
-                            .addComponent(id_textfield)
-                            .addComponent(noTelp_textfield)
-                            .addComponent(username_textfield, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(139, 139, 139)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(65, 65, 65)
@@ -340,7 +336,16 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(213, 213, 213)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(441, 441, 441)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(id_label)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(nama_textfield)
+                                .addComponent(alamat_textfield)
+                                .addComponent(noTelp_textfield)
+                                .addComponent(username_textfield, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)))))
                 .addContainerGap(126, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -352,9 +357,9 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
                         .addGap(34, 34, 34)
                         .addComponent(jLabel2)
                         .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(id_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(id_label))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -387,7 +392,7 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(165, 165, 165)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addContainerGap(258, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -432,7 +437,7 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
         // TODO add your handling code here:
         int i = Admin_table.getSelectedRow();{
        
-            id_textfield.setText(tb.getValueAt(i,0).toString());
+            id_label.setText(tb.getValueAt(i,0).toString());
             nama_textfield.setText(tb.getValueAt(i,1).toString());
             username_textfield.setText(tb.getValueAt(i,2).toString());
             alamat_textfield.setText(tb.getValueAt(i,3).toString());
@@ -478,7 +483,7 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Admin_table;
     private javax.swing.JTextField alamat_textfield;
-    private javax.swing.JTextField id_textfield;
+    private javax.swing.JLabel id_label;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
