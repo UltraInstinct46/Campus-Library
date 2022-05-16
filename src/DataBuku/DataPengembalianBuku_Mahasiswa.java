@@ -6,9 +6,9 @@ package DataBuku;
 
 import Member.*;
 import Conection.Connectionc;
-import static DataBuku.DataPinjamBuku_Mahasiwa.con;
-import static DataBuku.DataPinjamBuku_Mahasiwa.id;
-import static DataBuku.DataPinjamBuku_Mahasiwa.stm;
+import static DataBuku.DataPinjamBuku_Mahasiswa.con;
+import static DataBuku.DataPinjamBuku_Mahasiswa.id;
+import static DataBuku.DataPinjamBuku_Mahasiswa.stm;
 import Login.Login_CampusLibrary;
 import java.sql.*;
 import REGISTER.*;
