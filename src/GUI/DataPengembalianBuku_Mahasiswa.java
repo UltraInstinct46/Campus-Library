@@ -8,10 +8,7 @@ import Conection.Connectionc;
 import static GUI.DataPinjamBuku_Mahasiswa.con;
 import static GUI.DataPinjamBuku_Mahasiswa.id;
 import static GUI.DataPinjamBuku_Mahasiswa.stm;
-<<<<<<< HEAD
-=======
-import Login.Login_CampusLibrary;
->>>>>>> 36051f89283ac2ccc9ec22e547521733cddbefb9
+import GUI.Login_CampusLibrary;
 import java.sql.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

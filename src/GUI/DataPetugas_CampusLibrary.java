@@ -5,10 +5,7 @@
 package GUI;
 
 import Conection.Connectionc;
-<<<<<<< HEAD:src/GUI/DataPetugas_CampusLibrary.java
 import static GUI.MembersData.id;
-=======
->>>>>>> 36051f89283ac2ccc9ec22e547521733cddbefb9:src/DataPetugas/DataPetugas_CampusLibrary.java
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import javax.swing.JOptionPane;
