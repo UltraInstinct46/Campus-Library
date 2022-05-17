@@ -167,6 +167,7 @@ public class DataPengembalianBuku_Mahasiswa extends javax.swing.JFrame {
     public DataPengembalianBuku_Mahasiswa() {
         initComponents();
         connection.setKoneksi();
+        setLocationRelativeTo(null);
         showCombobox();
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         kelas_combobox.addItemListener(event -> {

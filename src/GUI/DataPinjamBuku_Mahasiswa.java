@@ -86,6 +86,7 @@ public class DataPinjamBuku_Mahasiswa extends javax.swing.JFrame {
         initComponents();
         connection.setKoneksi();
         showCombobox();
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         kelas_combobox.addItemListener(event -> {
         // The item affected by the event.

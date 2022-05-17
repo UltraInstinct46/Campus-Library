@@ -31,6 +31,7 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
      */
     public Login_CampusLibrary() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     
     

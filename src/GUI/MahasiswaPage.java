@@ -19,6 +19,7 @@ public class MahasiswaPage extends javax.swing.JFrame {
      */
     public MahasiswaPage() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     public MahasiswaPage(String username) {
         initComponents();

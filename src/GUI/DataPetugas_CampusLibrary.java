@@ -142,6 +142,7 @@ public class DataPetugas_CampusLibrary extends javax.swing.JFrame {
         initComponents();
         connection.setKoneksi();
         showTable();
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         id_label.setText(""+(id+1));
     }

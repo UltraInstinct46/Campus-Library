@@ -152,6 +152,7 @@ public class DataBuku extends javax.swing.JFrame {
     public DataBuku() {
         initComponents();
         connection.setKoneksi();
+        setLocationRelativeTo(null);
         showTable();
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         id_textfield.setText(id+"");

@@ -21,6 +21,7 @@ public class AdminPage extends javax.swing.JFrame {
      */
     public AdminPage() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     public AdminPage(String username) {
         initComponents();

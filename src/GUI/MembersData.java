@@ -158,6 +158,7 @@ public class MembersData extends javax.swing.JFrame {
         showTable();
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         jLabel8.setText(""+(id+1));
+        setLocationRelativeTo(null);
     }
 
     /**

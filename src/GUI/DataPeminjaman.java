@@ -151,6 +151,7 @@ public class DataPeminjaman extends javax.swing.JFrame {
     public DataPeminjaman() {
         initComponents();
         connection.setKoneksi();
+        setLocationRelativeTo(null);
         showTable();
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         idpeminjam_textfield.setText(""+id);

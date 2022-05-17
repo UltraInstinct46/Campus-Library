@@ -129,6 +129,7 @@ public class UserData extends javax.swing.JFrame {
         connection.setKoneksi();
         showTable();
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
 
     /**
