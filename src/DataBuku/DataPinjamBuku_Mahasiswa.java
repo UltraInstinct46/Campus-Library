@@ -10,6 +10,7 @@ import static DataBuku.DataPengembalianBuku_Mahasiswa.con;
 import static DataBuku.DataPengembalianBuku_Mahasiswa.dm;
 import static DataBuku.DataPengembalianBuku_Mahasiswa.res;
 import static DataBuku.DataPengembalianBuku_Mahasiswa.stm;
+import HalamanUtama.AdminPage;
 import Login.Login_CampusLibrary;
 import java.sql.*;
 import REGISTER.*;
@@ -358,6 +359,7 @@ public class DataPinjamBuku_Mahasiswa extends javax.swing.JFrame {
 
     private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_update_buttonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
