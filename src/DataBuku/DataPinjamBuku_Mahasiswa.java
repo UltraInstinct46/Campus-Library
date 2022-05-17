@@ -10,6 +10,7 @@ import static DataBuku.DataPengembalianBuku_Mahasiswa.con;
 import static DataBuku.DataPengembalianBuku_Mahasiswa.dm;
 import static DataBuku.DataPengembalianBuku_Mahasiswa.res;
 import static DataBuku.DataPengembalianBuku_Mahasiswa.stm;
+import HalamanUtama.AdminPage;
 import Login.Login_CampusLibrary;
 import java.sql.*;
 import REGISTER.*;
@@ -41,6 +42,7 @@ public class DataPinjamBuku_Mahasiswa extends javax.swing.JFrame {
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
             stm = con.createStatement();
             res=stm.executeQuery("SELECT id_buku,judul_buku FROM data_buku where stok > 0");
+            dm.addElement("-");
             while(res.next()){
             dm.addElement(res.getString(2));
         }
@@ -358,6 +360,7 @@ public class DataPinjamBuku_Mahasiswa extends javax.swing.JFrame {
 
     private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_update_buttonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

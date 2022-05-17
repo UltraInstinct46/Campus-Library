@@ -123,6 +123,7 @@ public class DataPengembalianBuku_Mahasiswa extends javax.swing.JFrame {
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
             stm = con.createStatement();
             res=stm.executeQuery("SELECT data_peminjambuku.id_buku,data_buku.judul_buku FROM data_peminjambuku INNER JOIN data_buku ON data_peminjambuku.id_buku = data_buku.id_buku WHERE data_peminjambuku.status='Belum Dikembalikan' AND data_peminjambuku.username ='"+Login_CampusLibrary.usm+"'");
+            dm.addElement("-");
             while(res.next()){
             dm.addElement(res.getString(2));
         }
@@ -423,6 +424,7 @@ public class DataPengembalianBuku_Mahasiswa extends javax.swing.JFrame {
 
     private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
 //        updateData();
     }//GEN-LAST:event_update_buttonActionPerformed
 
