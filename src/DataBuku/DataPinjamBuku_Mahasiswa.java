@@ -42,6 +42,7 @@ public class DataPinjamBuku_Mahasiswa extends javax.swing.JFrame {
             con= DriverManager.getConnection("jdbc:mysql://localhost:3306/db_library","root","");
             stm = con.createStatement();
             res=stm.executeQuery("SELECT id_buku,judul_buku FROM data_buku where stok > 0");
+            dm.addElement("-");
             while(res.next()){
             dm.addElement(res.getString(2));
         }
