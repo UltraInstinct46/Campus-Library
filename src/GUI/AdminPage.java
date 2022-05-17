@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package HalamanUtama;
+package GUI;
 
-import DataBuku.DataPengembalianBuku_Mahasiswa;
-import DataBuku.DataPinjamBuku_Mahasiswa;
-import DataPetugas.DataPetugas_CampusLibrary;
-import Member.MembersData;
+import GUI.DataPengembalianBuku_Mahasiswa;
+import GUI.DataPinjamBuku_Mahasiswa;
+import GUI.DataPetugas_CampusLibrary;
+import GUI.MembersData;
 import javax.swing.JOptionPane;
 
 /**
