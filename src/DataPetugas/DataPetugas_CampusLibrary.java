@@ -5,7 +5,6 @@
 package DataPetugas;
 
 import Conection.Connectionc;
-import static Member.MembersData.id;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import javax.swing.JOptionPane;
