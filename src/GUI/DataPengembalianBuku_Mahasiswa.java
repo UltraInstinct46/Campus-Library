@@ -2,16 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DataBuku;
+package GUI;
 
-import Member.*;
 import Conection.Connectionc;
-import static DataBuku.DataPinjamBuku_Mahasiswa.con;
-import static DataBuku.DataPinjamBuku_Mahasiswa.id;
-import static DataBuku.DataPinjamBuku_Mahasiswa.stm;
-import Login.Login_CampusLibrary;
+import static GUI.DataPinjamBuku_Mahasiswa.con;
+import static GUI.DataPinjamBuku_Mahasiswa.id;
+import static GUI.DataPinjamBuku_Mahasiswa.stm;
 import java.sql.*;
-import REGISTER.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;

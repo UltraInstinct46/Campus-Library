@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Login;
+package GUI;
 
 import Conection.ConnectionC1;
-import HalamanUtama.AdminPage;
-import HalamanUtama.MahasiswaPage;
+import GUI.AdminPage;
+import GUI.MahasiswaPage;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Connection;
@@ -31,6 +31,7 @@ public class Login_CampusLibrary extends javax.swing.JFrame {
      */
     public Login_CampusLibrary() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     
     
