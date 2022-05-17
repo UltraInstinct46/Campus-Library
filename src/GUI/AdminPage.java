@@ -4,20 +4,10 @@
  */
 package GUI;
 
-<<<<<<< HEAD
-import DataBuku.DataBuku;
-import DataBuku.DataPeminjaman;
-import DataBuku.DataPengembalianBuku_Mahasiswa;
-import DataBuku.DataPinjamBuku_Mahasiswa;
-import DataPetugas.DataPetugas_CampusLibrary;
-import Member.MembersData;
-import REGISTER.UserData;
-=======
 import GUI.DataPengembalianBuku_Mahasiswa;
 import GUI.DataPinjamBuku_Mahasiswa;
 import GUI.DataPetugas_CampusLibrary;
 import GUI.MembersData;
->>>>>>> 410e5dec57770f67d0058cb35a3b8c47475598f1
 import javax.swing.JOptionPane;
 
 /**
@@ -147,7 +137,7 @@ public class AdminPage extends javax.swing.JFrame {
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/peminjaman buku.png"))); // NOI18N
 
         jButton10.setBackground(new java.awt.Color(255, 255, 255));
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Logo_User-removebg-preview (1).png"))); // NOI18N
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/return.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -359,13 +349,8 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-<<<<<<< HEAD
-    UserData ud = new UserData ();
-    ud.setVisible(true);
-=======
     UserData dp = new UserData ();
     dp.setVisible(true);
->>>>>>> 83be62ba3044580e0fce9d3ad632c52822944211
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

@@ -310,7 +310,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Assets/Logo_User-removebg-preview (1).png"/>
+              <Image iconType="3" name="/Assets/return.png"/>
             </Property>
           </Properties>
         </Component>
