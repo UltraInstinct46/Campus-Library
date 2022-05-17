@@ -342,7 +342,9 @@ public class AdminPage extends javax.swing.JFrame {
     if(JOptionPane.showConfirmDialog(null,"APAKAH ANDA YAKIN UNTUK LOGOUT?"+"JIKA IYA, TEKAN OK","Information",
             JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE) == JOptionPane.OK_OPTION){
         try{
-            this.dispose();
+            this.setVisible(false);
+            Login_CampusLibrary  cl = new Login_CampusLibrary();
+            cl.setVisible (true);
         }catch (Exception e){
             JOptionPane.showMessageDialog (null, e.getMessage());
         }
