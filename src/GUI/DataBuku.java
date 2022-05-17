@@ -2,12 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package DataBuku;
+package GUI;
 
-import Member.*;
 import Conection.Connectionc;
 import java.sql.*;
-import REGISTER.*;
 import java.text.*;
 import java.awt.print.*; 
 import javax.swing.JOptionPane;
