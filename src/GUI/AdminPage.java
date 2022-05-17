@@ -117,7 +117,7 @@ public class AdminPage extends javax.swing.JFrame {
 
         jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setForeground(new java.awt.Color(0, 0, 0));
-        jButton5.setText("Data Pengembalian");
+        jButton5.setText("Data User");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -312,13 +312,13 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        DataPinjamBuku_Mahasiswa dp = new DataPinjamBuku_Mahasiswa();
+        DataPeminjaman dp = new DataPeminjaman();
         dp.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        DataPinjamBuku_Mahasiswa db = new DataPinjamBuku_Mahasiswa();
+        DataBuku db = new DataBuku();
         db.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -349,7 +349,7 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-    DataPengembalianBuku_Mahasiswa dp = new DataPengembalianBuku_Mahasiswa ();
+    UserData dp = new UserData ();
     dp.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
