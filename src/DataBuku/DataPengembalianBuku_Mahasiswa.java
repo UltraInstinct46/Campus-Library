@@ -423,6 +423,7 @@ public class DataPengembalianBuku_Mahasiswa extends javax.swing.JFrame {
 
     private void update_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_buttonActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
 //        updateData();
     }//GEN-LAST:event_update_buttonActionPerformed
 
