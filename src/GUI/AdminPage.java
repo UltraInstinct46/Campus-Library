@@ -137,7 +137,7 @@ public class AdminPage extends javax.swing.JFrame {
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/peminjaman buku.png"))); // NOI18N
 
         jButton10.setBackground(new java.awt.Color(255, 255, 255));
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/return.png"))); // NOI18N
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Logo_User-removebg-preview (1).png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
