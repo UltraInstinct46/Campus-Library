@@ -4,8 +4,8 @@
  */
 package HalamanUtama;
 
-import DataBuku.DataPengembalianBuku_Mahasiswa;
-import DataBuku.DataPinjamBuku_Mahasiswa;
+import GUI.DataPengembalianBuku_Mahasiswa;
+import GUI.DataPinjamBuku_Mahasiswa;
 import javax.swing.JOptionPane;
 
 /**

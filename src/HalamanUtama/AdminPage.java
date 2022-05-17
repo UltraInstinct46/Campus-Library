@@ -4,8 +4,8 @@
  */
 package HalamanUtama;
 
-import DataBuku.DataPengembalianBuku_Mahasiswa;
-import DataBuku.DataPinjamBuku_Mahasiswa;
+import GUI.DataPengembalianBuku_Mahasiswa;
+import GUI.DataPinjamBuku_Mahasiswa;
 import DataPetugas.DataPetugas_CampusLibrary;
 import Member.MembersData;
 import javax.swing.JOptionPane;
@@ -312,7 +312,7 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        DataPengembalianBuku_Mahasiswa dp = new DataPengembalianBuku_Mahasiswa();
+        DataPinjamBuku_Mahasiswa dp = new DataPinjamBuku_Mahasiswa();
         dp.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
