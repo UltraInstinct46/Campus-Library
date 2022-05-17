@@ -359,8 +359,13 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+<<<<<<< HEAD
     UserData ud = new UserData ();
     ud.setVisible(true);
+=======
+    UserData dp = new UserData ();
+    dp.setVisible(true);
+>>>>>>> 83be62ba3044580e0fce9d3ad632c52822944211
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
