@@ -5,7 +5,7 @@
 package HalamanUtama;
 
 import DataBuku.DataPengembalianBuku_Mahasiswa;
-import DataBuku.DataPinjamBuku_Mahasiwa;
+import DataBuku.DataPinjamBuku_Mahasiswa;
 import DataPetugas.DataPetugas_CampusLibrary;
 import Member.MembersData;
 import javax.swing.JOptionPane;
@@ -118,6 +118,11 @@ public class AdminPage extends javax.swing.JFrame {
         jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setForeground(new java.awt.Color(0, 0, 0));
         jButton5.setText("Data Pengembalian");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/anggota.png"))); // NOI18N
@@ -313,7 +318,7 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        DataPinjamBuku_Mahasiwa db = new DataPinjamBuku_Mahasiwa();
+        DataPinjamBuku_Mahasiswa db = new DataPinjamBuku_Mahasiswa();
         db.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -341,6 +346,12 @@ public class AdminPage extends javax.swing.JFrame {
         }
     }
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    DataPengembalianBuku_Mahasiswa dp = new DataPengembalianBuku_Mahasiswa ();
+    dp.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
